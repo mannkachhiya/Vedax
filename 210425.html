@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vedax Pharma</title>
+  <meta name="description" content="Vedax Pharma offers high-quality pharmaceutical products. Explore our range and contact us for inquiries.">
+  <title>Vedax Pharma - Quality Pharmaceutical Products</title>
   <link rel="icon" type="image/x-icon" href="./imgs/favicon.ico">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
     body {
       font-family: sans-serif;
@@ -165,6 +166,8 @@
     .mySlides img {
       width: 100%;
       height: 60%;
+      object-fit: cover;
+      loading: lazy;
     }
 
     .prev, .next {
@@ -195,12 +198,56 @@
       padding-top: 1px;
     }
 
+    /* New Left Image, Right Text Section */
+    .image-text-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background-color: #fff;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .image-left {
+      flex: 1;
+      padding-right: 20px;
+    }
+
+    .text-right {
+      flex: 1;
+    }
+
+    .section-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-title {
+      color: #eb9324;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .section-text {
+      font-size: 1.2rem;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #209872;
+    }
+
     /* Responsive Design */
     @media screen and (max-width: 768px) {
       .header-top {
         flex-direction: column;
-        align-items: center; 
-        justify-content: center; 
+        align-items: center;
+        justify-content: center;
         text-align: center;
       }
 
@@ -234,7 +281,7 @@
 
       .get-quote-button {
         margin-top: 10px;
-        width: 100%;
+        width: 50%;
         text-align: center;
       }
 
@@ -249,6 +296,24 @@
 
       .mySlides {
         aspect-ratio: 4 / 3;
+      }
+
+      .image-text-container {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .image-left {
+        padding-right: 0;
+        margin-bottom: 20px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .section-text {
+        font-size: 1rem;
       }
     }
 
@@ -271,7 +336,24 @@
         font-size: 14px;
         padding: 10px;
       }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
     }
+    
+    .banner {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to right, #00c4cc, #ff6f61);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 2em;
+            text-align: center;
+        }
   </style>
 </head>
 <body>
@@ -293,7 +375,7 @@
         <i class="fab fa-instagram"></i>
       </a>
       <a href="https://threads.net" class="social-icon" target="_blank">
-        <i class="fab fa-thread"></i>
+        <i class="fab fa-threads"></i>
       </a>
     </div>
   </div>
@@ -301,7 +383,7 @@
   <!-- Header and Navigation Bar -->
   <div class="header-top">
     <div class="logo-container">
-      <img src="./imgs/logo.png" alt="Logo" class="logo">
+      <img src="./imgs/logo.png" alt="Vedax Pharma Logo" class="logo">
     </div>
     <div class="contact-info">
       <div class="contact-item">
@@ -318,15 +400,15 @@
   </div>
 
   <div class="navigation-bar">
-    <button class="hamburger">
+    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
       <i class="fas fa-bars"></i>
     </button>
     <ul class="nav-links">
-      <li><a href="#">HOME</a></li>
-      <li><a href="#">ABOUT US</a></li>
-      <li><a href="#">OUR PRODUCTS</a></li>
-      <li><a href="#">AVAILABLE AT</a></li>
-      <li><a href="#">CONTACT US</a></li>
+      <li><a href="#home">HOME</a></li>
+      <li><a href="#about">ABOUT US</a></li>
+      <li><a href="#products">OUR PRODUCTS</a></li>
+      <li><a href="#available">AVAILABLE AT</a></li>
+      <li><a href="#contact">CONTACT US</a></li>
     </ul>
     <button class="get-quote-button">GET A QUOTE</button>
   </div>
@@ -334,51 +416,84 @@
   <div class="content">
     <div class="slideshow-container">
       <div class="mySlides">
-        <img src="./imgs/template_photo_1.jpg" alt="Slide 1">
+        <img src="./imgs/template_photo_1.jpg" alt="Vedax Pharma product showcase" loading="lazy">
       </div>
       <div class="mySlides">
-        <img src="./imgs/template_photo_2.jpg" alt="Slide 2">
+        <img src="./imgs/template_photo_2.jpg" alt="Vedax Pharma facility" loading="lazy">
       </div>
       <div class="mySlides">
-        <img src="./imgs/template_photo_1.jpg" alt="Slide 3">
+        <img src="./imgs/template_photo_1.jpg" alt="Vedax Pharma team" loading="lazy">
       </div>
-      <a class="prev" onclick="plusSlides(-1)">❮</a>
-      <a class="next" onclick="plusSlides(1)">❯</a>
+      <a class="prev" onclick="plusSlides(-1)" aria-label="Previous slide">❮</a>
+      <a class="next" onclick="plusSlides(1)" aria-label="Next slide">❯</a>
     </div>
-    <div style="height: 2000px;"></div>
+    
+    
+    <div class="banner">Clients may rely on us for highly effective range of products/Medicines which useful in the healthcare Industries.</div>
+    
+    
+
+    <!-- New Left Image, Right Text Section -->
+    <div class="image-text-container" id="about">
+      <div class="image-left">
+        <img src="./imgs/about.jpg" alt="Vedax Pharma laboratory" class="section-image" loading="lazy">
+      </div>
+      <div class="text-right">
+        <h2 class="section-title"><span class="highlight">WELCOME TO</span> VEDEX PHARMA</h2><hr>
+        <p class="section-text">
+At Vedax Pharma, we have built a solid reputation for providing the best range of goods for use in the pharmacutial industry. Since the foundation of our business in 2007, we have gained a reputation as a reliable supplier and trader of a wide range of pharmaceutical-based products. Our extensive collection includes Respiratory care, Anti inflammatory care, skin care and G.I. care and many more. We assure our clients the best pricing for our highly effective products. In addition we observe ethics while conducting business with our customers.        </p>
+      </div>
+    </div>
   </div>
 
   <script>
-    // Toggle Menu
+    // Hamburger Menu
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('active');
+      const isExpanded = navLinks.classList.contains('active');
+      hamburger.setAttribute('aria-expanded', isExpanded);
     });
 
     // Slideshow
     let slideIndex = 1;
+    let isSliding = false;
     showSlides(slideIndex);
 
     function plusSlides(n) {
+      if (isSliding) return;
+      isSliding = true;
       showSlides(slideIndex += n);
-    }
-
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
+      setTimeout(() => { isSliding = false; }, 500);
     }
 
     function showSlides(n) {
-      let i;
       let slides = document.getElementsByClassName("mySlides");
-      if (n > slides.length) { slideIndex = 1; }
-      if (n < 1) { slideIndex = slides.length; }
-      for (i = 0; i < slides.length; i++) {
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
+      for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
       }
       slides[slideIndex-1].style.display = "block";
     }
+
+    // Auto Slideshow
+    const slideshow = document.querySelector('.slideshow-container');
+    let autoSlideInterval;
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(() => plusSlides(1), 5000);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+
+    slideshow.addEventListener('mouseenter', stopAutoSlide);
+    slideshow.addEventListener('mouseleave', startAutoSlide);
+    startAutoSlide();
   </script>
 </body>
 </html>
