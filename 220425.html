@@ -17,9 +17,15 @@
 
 
 /*bg image*/
- html, body {
-      height: 100%;
+ /* Reset and base styles */
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
@@ -27,82 +33,133 @@
       color: white;
     }
 
+    /* Responsive fullscreen-bg class */
     .fullscreen-bg {
-      background: url('./imgs/bg.png') no-repeat center center fixed;
+      background: url('https://raw.githubusercontent.com/mannkachhiya/Vedax/refs/heads/main/imgs/bg.png') no-repeat center center fixed;
       background-size: cover;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      width: 100vw;
+      min-height: 100vh;
+      width: 100%;
     }
 
+    /* Responsive container class */
     .container {
-      height: 100%;
       width: 100%;
-      padding: 60px 20px;
+      max-width: 1200px;
+      padding: clamp(1rem, 5vw, 2rem);
       text-align: center;
       background-color: rgba(0, 0, 0, 0.6);
-      box-sizing: border-box;
     }
 
+    /* Responsive h1 styles (no specific class, but styled for responsiveness) */
     h1 {
-      font-size: 36px;
+      font-size: clamp(1.8rem, 5vw, 2.2rem);
+      margin-bottom: clamp(1rem, 3vw, 1.5rem);
     }
 
+    /* Responsive highlight class */
     .highlight {
       color: #FFA54F;
     }
 
+    /* Responsive testimonials class */
     .testimonials {
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin-top: 40px;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(1rem, 3vw, 1.5rem);
+      margin-top: clamp(1.5rem, 4vw, 2rem);
     }
 
+    /* Responsive testimonial class */
     .testimonial {
       background-color: rgba(0, 0, 0, 0.5);
       border: 1px solid #fff;
-      padding: 30px 20px;
+      padding: clamp(1rem, 3vw, 1.5rem);
       border-radius: 10px;
-      width: 300px;
-      box-sizing: border-box;
+      width: 100%;
+      max-width: 350px;
     }
 
+    /* Responsive active class for testimonial */
     .testimonial.active {
       background-color: white;
       color: black;
     }
 
+    /* Responsive img within testimonial */
     .testimonial img {
-      width: 80px;
+      width: clamp(60px, 15vw, 80px);
       border-radius: 50%;
-      margin-bottom: 20px;
+      margin-bottom: clamp(0.75rem, 2vw, 1rem);
     }
 
+    /* Responsive name class */
     .name {
       font-weight: bold;
-      font-size: 20px;
-      margin-top: 15px;
+      font-size: clamp(1.1rem, 4vw, 1.25rem);
+      margin-top: clamp(0.5rem, 2vw, 0.75rem);
     }
 
+    /* Responsive role class */
     .role {
       color: #FF6F40;
       font-weight: bold;
+      font-size: clamp(0.9rem, 3vw, 1rem);
     }
 
+    /* Responsive name within active testimonial */
     .active .name {
       color: #00BFFF;
     }
 
+    /* Responsive role within active testimonial */
     .active .role {
       color: #FF6F40;
     }
 
+    /* Tablet and larger screens */
+    @media (min-width: 768px) {
+      .testimonials {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: clamp(1.5rem, 4vw, 2rem);
+      }
+
+      .testimonial {
+        width: calc(50% - clamp(0.75rem, 2vw, 1rem));
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 2.5rem);
+      }
+
+      .container {
+        padding: clamp(1.5rem, 5vw, 2.5rem);
+      }
+    }
+
+    /* Desktop screens */
+    @media (min-width: 1024px) {
+      .testimonial {
+        width: calc(33.33% - clamp(0.75rem, 2vw, 1.33rem));
+      }
+
+      .container {
+        padding: clamp(2rem, 5vw, 3rem);
+      }
+
+      h1 {
+        font-size: clamp(2.2rem, 5vw, 2.8rem);
+      }
+    }
 
 
+
+    
     /* Information Bar Style */
     .info-bar {
       display: flex;
