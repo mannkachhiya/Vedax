@@ -15,6 +15,94 @@
       background-color: #f4f4f4;
     }
 
+
+/*bg image*/
+ html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      color: white;
+    }
+
+    .fullscreen-bg {
+      background: url('./imgs/bg.png') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .container {
+      height: 100%;
+      width: 100%;
+      padding: 60px 20px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.6);
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 36px;
+    }
+
+    .highlight {
+      color: #FFA54F;
+    }
+
+    .testimonials {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .testimonial {
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 1px solid #fff;
+      padding: 30px 20px;
+      border-radius: 10px;
+      width: 300px;
+      box-sizing: border-box;
+    }
+
+    .testimonial.active {
+      background-color: white;
+      color: black;
+    }
+
+    .testimonial img {
+      width: 80px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .name {
+      font-weight: bold;
+      font-size: 20px;
+      margin-top: 15px;
+    }
+
+    .role {
+      color: #FF6F40;
+      font-weight: bold;
+    }
+
+    .active .name {
+      color: #00BFFF;
+    }
+
+    .active .role {
+      color: #FF6F40;
+    }
+
+
+
     /* Information Bar Style */
     .info-bar {
       display: flex;
@@ -350,7 +438,7 @@
             align-items: center;
             color: white;
             font-family: Arial, sans-serif;
-            font-size: 2em;
+            font-size: 1.1em;
             text-align: center;
         }
         
@@ -460,10 +548,12 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 40px;
-      margin-top: 40px;
+      margin-top: 60px;
       max-width: 1200px;
       margin-left: auto;
       margin-right: auto;
+      padding: 16px;
+      margin-bottom: 60px;
     }
     article.card {
       display: flex;
@@ -502,6 +592,79 @@
       line-height: 1.4;
     }
         
+        
+        
+        
+    /*footer*/    
+    .container1 {
+      display: flex;
+      justify-content: space-around;
+      padding: 40px 20px;
+      background: linear-gradient(90deg, #eb9324, #209872);
+    }
+    .about-section {
+      max-width: 300px;
+    }
+    .about-heading {
+      color: white;
+    }
+    .about-logo img {
+      width: 150px;
+    }
+    .about-description {
+      margin-top: 10px;
+    }
+    .read-more-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: 1px solid #066344;
+      color: #fff;
+      background: #0000004d;
+      cursor: pointer;
+    }
+    .contact-section {
+      max-width: 300px;
+    }
+    .contact-heading {
+      color: white;
+    }
+    .contact-address,
+    .contact-phone,
+    .contact-email {
+      margin: 10px 0;
+    }
+    .social-icons {
+      margin-top: 10px;
+    }
+    .social-icon {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      color: white;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+    .facebook-icon {
+      background: #3b5998;
+    }
+    .google-icon {
+      background: #dd4b39;
+    }
+    .instagram-icon {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    }
+    .threads-icon {
+      background: #000;
+    }
+    .developer-credit {
+      margin-top: 10px;
+    }
+    .developer-logo {
+      height: 20px;
+      vertical-align: middle;
+    }    
         
         
         
@@ -552,7 +715,7 @@
 </head>
 <body>
   <!-- Information Bar -->
-  <div class="info-bar">
+  <div class="info-bar" id="home">
     <div class="info-left">
       <span class="clock-icon">🕒</span>
       <span class="hours">Opening Hours: Mon - Sat 8.00 - 18.00</span>
@@ -784,8 +947,80 @@ At Vedax Pharma, we have built a solid reputation for providing the best range o
         <p>Continuous investment in upgrading technology to stay ahead in formulation.</p>
       </div>
     </article>
+  </main>
 
 
+<div class="fullscreen-bg">
+    <div class="container">
+        <h2 class="section-title" align="center">CLIENT <span class="highlight"> TESTIMONIAL'S</span></h2><hr>
+      <div class="testimonials">
+        <div class="testimonial">
+          <img src="avatar.png" alt="Avatar">
+          <p><em>Pikaso is doing a great job; I'm pleased with how rapidly they are addressing our needs.</em></p>
+          <div class="name">K.K Patel</div>
+          <div class="role">Customer</div>
+        </div>
+        <div class="testimonial active">
+          <img src="avatar.png" alt="Avatar">
+          <p><em>We love your product -- I use it every day and cannot imagine my job without it!</em></p>
+          <div class="name">Hitarth Patel</div>
+          <div class="role">Customer</div>
+        </div>
+        <div class="testimonial">
+          <img src="avatar.png" alt="Avatar">
+          <p><em>We are very happy with the results of the recently launch products.</em></p>
+          <div class="name">DWSS</div>
+          <div class="role">Customer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="container1">
+    <div class="about-section">
+      <h2 class="about-heading">ABOUT US</h2>
+      <div class="about-logo">
+        <img src="pikaso-logo.png" alt="Pikaso Logo">
+      </div>
+      <p class="about-description">Pikaso Pharma complies with various National / International regulatory norms and standards.</p>
+      <button class="read-more-button">Read More</button>
+    </div>
+
+    <div class="contact-section">
+      <h2 class="contact-heading">CONTACT US</h2>
+      <p class="contact-address">No - 01, Patel Estate, Near Water Tank, S.NO 207 Ranoli Vadodara.</p>
+      <p class="contact-phone">+91 9998 005 083</p>
+      <p class="contact-email">info@pikasopharma.in</p>
+      <div class="social-icons">
+        <a href="#" class="social-icon facebook-icon">f</a>
+        <a href="#" class="social-icon google-icon">G</a>
+        <a href="#" class="social-icon instagram-icon"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon threads-icon"><i class="fab fa-threads"></i></a>
+      </div>
+    </div>
+  </div>
+
+<a href="#home" style="position: fixed; bottom: 30px; right: 30px; border-radius: 5px; display: block; width: 50px; height: 50px; cursor: pointer; background-image: url(./imgs/up_icon.png); background-size: cover; background-position: center;"></a>
+    
+
+<!-- js for toggle menu -->
+<script>
+  var MenuItems = document.getElementById('MenuItems');
+  MenuItems.style.maxHeight = '0px';
+
+  function menutoggle() {
+    if (MenuItems.style.maxHeight == '0px') {
+      MenuItems.style.maxHeight = '200px';
+    } else {
+      MenuItems.style.maxHeight = '0px';
+    }
+  }
+</script>
+<!-- partial -->
+  
+</body>
+</html>
 
 
     <script>
