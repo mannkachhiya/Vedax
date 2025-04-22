@@ -666,7 +666,52 @@
       vertical-align: middle;
     }    
         
-        
+    /*hfooter*/   
+        .footer_strip {
+      background-color: #f8f8f8;
+      padding: 15px 0;
+      border-top: 1px solid #ddd;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .footer_menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .footer_item {
+      display: inline;
+      margin: 0 5px;
+      color: #999;
+    }
+
+    .footer_link {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer_link:hover {
+      color: #0073e6;
+    }
+
+    .footer_link--highlight {
+      font-weight: bold;
+      color: #0073e6;
+    }
+
+    .footer_clear {
+      clear: both;
+    }    
+            
         
   </style>
   
@@ -1002,7 +1047,25 @@ At Vedax Pharma, we have built a solid reputation for providing the best range o
   </div>
 
 <a href="#home" style="position: fixed; bottom: 30px; right: 30px; border-radius: 5px; display: block; width: 50px; height: 50px; cursor: pointer; background-image: url(./imgs/up_icon.png); background-size: cover; background-position: center;"></a>
+
+
     
+    <div class="footer_strip">
+    <ul class="footer_menu">
+      <li class="footer_item"><a href="/" class="footer_link footer_link--highlight">Home Page</a></li>
+      <li class="footer_item">|</li>
+      <li class="footer_item"><a href="/company-profile.html" class="footer_link footer_link--highlight">About</a></li>
+      <li class="footer_item">|</li>
+      <li class="footer_item"><a href="https://www.vedaxpharma.com/products.html" class="footer_link footer_link--highlight">Our Products</a></li>
+      <li class="footer_item">|</li>
+      <li class="footer_item"><a href="/contact-us.html" class="footer_link footer_link--highlight">Available At</a></li>
+      <li class="footer_item">|</li>
+      <li class="footer_item"><a href="/sitemap.html" class="footer_link footer_link--highlight">Contact Us</a></li>
+    </ul>
+    <div class="footer_clear"></div>
+  </div>
+
+  
 
 <!-- js for toggle menu -->
 <script>
@@ -1018,9 +1081,6 @@ At Vedax Pharma, we have built a solid reputation for providing the best range o
   }
 </script>
 <!-- partial -->
-  
-</body>
-</html>
 
 
     <script>
