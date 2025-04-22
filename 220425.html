@@ -50,7 +50,7 @@
     
 
 /*bg image*/
- /* Reset and base styles */
+/* Reset and base styles */
     * {
       margin: 0;
       padding: 0;
@@ -80,13 +80,13 @@
     /* Responsive container class */
     .container {
       width: 100%;
-      max-width: 1500px;
+      max-width: 1200px;
       padding: clamp(1rem, 5vw, 2rem);
       text-align: center;
       background-color: rgba(0, 0, 0, 0.6);
     }
 
-    /* Responsive h1 styles (no specific class, but styled for responsiveness) */
+    /* Responsive h1 styles */
     h1 {
       font-size: clamp(1.8rem, 5vw, 2.2rem);
       margin-bottom: clamp(1rem, 3vw, 1.5rem);
@@ -124,7 +124,7 @@
 
     /* Responsive img within testimonial */
     .testimonial img {
-      width: clamp(60px, 30vw, 120px);
+      width: clamp(60px, 15vw, 80px);
       border-radius: 50%;
       margin-bottom: clamp(0.75rem, 2vw, 1rem);
     }
@@ -153,7 +153,7 @@
       color: #FF6F40;
     }
 
-    /* Tablet and larger screens */
+    /* Tablet screens */
     @media (min-width: 768px) {
       .testimonials {
         flex-direction: row;
@@ -166,19 +166,26 @@
         width: calc(50% - clamp(0.75rem, 2vw, 1rem));
       }
 
-      h1 {
-        font-size: clamp(2rem, 5vw, 2.5rem);
-      }
-
       .container {
         padding: clamp(1.5rem, 5vw, 2.5rem);
       }
-    }
 
+      h1 {
+        font-size: clamp(2rem, 5vw, 2.5rem);
+      }
+    }
     /* Desktop screens */
     @media (min-width: 1024px) {
+      .testimonials {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: clamp(1.5rem, 3vw, 2rem);
+      }
+
       .testimonial {
-        width: calc(33.33% - clamp(0.75rem, 2vw, 1.33rem));
+        width: calc(50% - clamp(0.75rem, 2vw, 1rem)); /* Two columns */
+        max-width: 400px; /* Slightly larger for desktop */
       }
 
       .container {
