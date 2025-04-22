@@ -542,101 +542,95 @@
         
         /*scroll*/
                 .scroll-container {
-            width: 100%;
-            max-width: 1500px;
-            margin: 0px auto;
-            overflow: hidden;
-            position: relative;
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            border-radius: 15px;
-            box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
-            padding: 0px 0;
-        }
+      width: 100%;
+      max-width: 1500px;
+      margin: auto;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #ffffff, #f8f9fa);
+      border-radius: 15px;
+      box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+    }
 
-        .scroll-content {
-            display: flex;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    .scroll-content {
+      display: flex;
+      transition: transform 0.8s ease-in-out;
+    }
 
-        .scroll-item {
-            min-width: 300px;
-            margin: 0 15px;
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    .scroll-item {
+      min-width: 300px;
+      margin: 0 15px;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        .scroll-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-        }
+    .scroll-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
 
-        .scroll-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
+    .scroll-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
 
-        .item-heading {
-            font-size: 22px;
-            font-weight: 600;
-            color: #333;
-            margin: 10px 0;
-        }
+    .item-heading {
+      font-size: 22px;
+      font-weight: 600;
+      color: #333;
+      margin: 10px 0;
+    }
 
-        .item-description {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
-        }
+    .item-description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+    }
 
-        .know-more-btn {
-            padding: 10px 25px;
-            background: linear-gradient(45deg, #eb9324, #209872);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 500;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
+    .know-more-btn {
+      padding: 10px 25px;
+      background: linear-gradient(45deg, #eb9324, #209872);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
 
-        .know-more-btn:hover {
-            background: linear-gradient(45deg, #209872, #eb9324);
-            transform: scale(1.05);
-        }
+    .know-more-btn:hover {
+      background: linear-gradient(45deg, #209872, #eb9324);
+      transform: scale(1.05);
+    }
 
-         .scroll-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.3);
-            color: white;
-            border: none;
-            padding: 15px;
-            cursor: pointer;
-            font-size: 22px;
-            z-index: 10;
-        }
+    .scroll-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.3);
+      color: white;
+      border: none;
+      padding: 15px;
+      cursor: pointer;
+      font-size: 22px;
+      z-index: 10;
+    }
 
-        .scroll-arrow:hover {
-            background: rgba(0, 0, 0, 0.4);
-        }
+    .scroll-arrow-left {
+      left: 20px;
+    }
 
-        .scroll-arrow-left {
-            left: 20px;
-        }
-
-        .scroll-arrow-right {
-            right: 20px;
-        }
-        
+    .scroll-arrow-right {
+      right: 20px;
+    }
         
         
         
@@ -945,87 +939,50 @@ At Vedax Pharma, we have built a solid reputation for providing the best range o
     </div>
   </div>
 
-<h2 class="section-title" align="center">OUR <span class="highlight">PRODUCTS</span></h2><hr>
+<h2 align="center">OUR <span class="highlight">PRODUCTS</span></h2>
+<hr>
 
-    <div class="scroll-container">
-        <div class="scroll-content">
-            <!-- Item 1 -->
-            <div class="scroll-item">
-                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 1">
-                <div class="item-heading">Item 1</div>
-                <div class="item-description">Discover the elegance of Item 1.</div>
-                <button class="know-more-btn">Know More</button>
-            </div>
-            <!-- Item 2 -->
-            <div class="scroll-item">
-                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 2">
-                <div class="item-heading">Item 2</div>
-                <div class="item-description">Experience the charm of Item 2.</div>
-                <button class="know-more-btn">Know More</button>
-            </div>
-            <!-- Item 3 -->
-            <div class="scroll-item">
-                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 3">
-                <div class="item-heading">Item 3</div>
-                <div class="item-description">Unleash creativity with Item 3.</div>
-                <button class="know-more-btn">Know More</button>
-            </div>
-            <!-- Item 4 -->
-            <div class="scroll-item">
-                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 4">
-                <div class="item-heading">Item 4</div>
-                <div class="item-description">Innovate with Item 4.</div>
-                <button class="know-more-btn">Know More</button>
-            </div>
-            <!-- Item 5 -->
-            <div class="scroll-item">
-                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 5">
-                <div class="item-heading">Item 5</div>
-                <div class="item-description">Transform with Item 5.</div>
-                <button class="know-more-btn">Know More</button>
-            </div>
-            <!-- Item 6 -->
-            <div class="scroll-item">
-                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 6">
-                <div class="item-heading">Item 6</div>
-                <div class="item-description">Inspire with Item 6.</div>
-                <button class="know-more-btn">Know More</button>
-            </div>
-            <!-- Item 7 -->
-            <div class="scroll-item">
-                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 7">
-                <div class="item-heading">Item 7</div>
-                <div class="item-description">Connect with Item 7.</div>
-                <button class="know-more-btn">Know More</button>
-            </div>
-            <!-- Item 8 -->
-            <div class="scroll-item">
-                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 8">
-                <div class="item-heading">Item 8</div>
-                <div class="item-description">Empower with Item 8.</div>
-                <button class="know-more-btn">Know More</button>
-            </div>
-            <!-- Item 9 -->
-            <div class="scroll-item">
-                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 9">
-                <div class="item-heading">Item 9</div>
-                <div class="item-description">Engage with Item 9.</div>
-                <button class="know-more-btn">Know More</button>
-            </div>
-            <!-- Item 10 -->
-            <div class="scroll-item">
-                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 10">
-                <div class="item-heading">Item 10</div>
-                <div class="item-description">Celebrate with Item 10.</div>
-                <button class="know-more-btn">Know More</button>
-            </div>
-        </div>
+<div class="scroll-container">
+  <div class="scroll-content" id="scroll-content">
+    <!-- Original Items 1-10 -->
+    <script>
+      const itemData = [
+        "Discover the elegance of Item 1.",
+        "Experience the charm of Item 2.",
+        "Unleash creativity with Item 3.",
+        "Innovate with Item 4.",
+        "Transform with Item 5.",
+        "Inspire with Item 6.",
+        "Connect with Item 7.",
+        "Empower with Item 8.",
+        "Engage with Item 9.",
+        "Celebrate with Item 10."
+      ];
+      for (let i = 0; i < 10; i++) {
+        document.write(`
+        <div class="scroll-item">
+          <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item ${i + 1}">
+          <div class="item-heading">Item ${i + 1}</div>
+          <div class="item-description">${itemData[i]}</div>
+          <button class="know-more-btn">Know More</button>
+        </div>`);
+      }
+      // Duplicate first 3 items
+      for (let i = 0; i < 3; i++) {
+        document.write(`
+        <div class="scroll-item">
+          <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item ${i + 1}">
+          <div class="item-heading">Item ${i + 1}</div>
+          <div class="item-description">${itemData[i]}</div>
+          <button class="know-more-btn">Know More</button>
+        </div>`);
+      }
+    </script>
+  </div>
 
-        <!-- Left Arrow -->
-        <button class="scroll-arrow scroll-arrow-left" id="scroll-left">‹</button>
-        <!-- Right Arrow -->
-        <button class="scroll-arrow scroll-arrow-right" id="scroll-right">›</button>
-    </div>
+  <button class="scroll-arrow scroll-arrow-left" id="scroll-left">‹</button>
+  <button class="scroll-arrow scroll-arrow-right" id="scroll-right">›</button>
+</div>
 
 <br>
 <h2 class="section-title" align="center">WHY <span class="highlight"> CHOOSE US?</span></h2><hr>
@@ -1199,67 +1156,61 @@ At Vedax Pharma, we have built a solid reputation for providing the best range o
 <!-- partial -->
 
 
-    <script>
-        const scrollContent = document.querySelector('.scroll-content');
-        const items = document.querySelectorAll('.scroll-item');
-        let currentIndex = 0;
+   <script>
+  const scrollContent = document.getElementById('scroll-content');
+  const scrollItems = document.querySelectorAll('.scroll-item');
+  const itemWidth = scrollItems[0].offsetWidth + 30; // item + margin
+  let currentIndex = 0;
+  const totalOriginalItems = 10;
+  const scrollInterval = 3000;
 
-        // Set auto-scroll interval (every 3 seconds)
-        const scrollInterval = 3000;
+  function updateScroll() {
+    scrollContent.style.transition = 'transform 0.8s ease-in-out';
+    scrollContent.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
 
-        // Function to scroll to the next item
-        function scrollToNextItem() {
-            if (currentIndex < items.length - 1) {
-                currentIndex++;
-            } else {
-                currentIndex = 0; // Loop back to the first item
-                scrollContent.style.transition = 'none'; // Disable transition for instant reset
-                scrollContent.style.transform = `translateX(0px)`;
-                // Force reflow to apply the transform without transition
-                scrollContent.offsetHeight;
-                scrollContent.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-                return;
-            }
-            updateScrollPosition();
-        }
+    // Reset instantly when we hit the duplicated items
+    if (currentIndex === totalOriginalItems) {
+      setTimeout(() => {
+        scrollContent.style.transition = 'none';
+        scrollContent.style.transform = 'translateX(0px)';
+        currentIndex = 0;
+      }, 850); // Match transition duration
+    }
+  }
 
-        // Function to scroll to the previous item
-        function scrollToPreviousItem() {
-            if (currentIndex > 0) {
-                currentIndex--;
-            } else {
-                currentIndex = items.length - 1; // Loop to the last item
-                scrollContent.style.transition = 'none'; // Disable transition for instant reset
-                const itemWidth = items[0].offsetWidth + 30; // Width of an item + margin
-                scrollContent.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-                // Force reflow to apply the transform without transition
-                scrollContent.offsetHeight;
-                scrollContent.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-            }
-            updateScrollPosition();
-        }
+  function nextItem() {
+    currentIndex++;
+    updateScroll();
+  }
 
-        // Update the scroll position based on the current index
-        function updateScrollPosition() {
-            const itemWidth = items[0].offsetWidth + 30; // Width of an item + margin
-            scrollContent.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-        }
+  function previousItem() {
+    if (currentIndex === 0) {
+      currentIndex = totalOriginalItems;
+      scrollContent.style.transition = 'none';
+      scrollContent.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+    }
+    setTimeout(() => {
+      scrollContent.style.transition = 'transform 0.8s ease-in-out';
+      currentIndex--;
+      updateScroll();
+    }, 20);
+  }
 
-        // Automatically scroll to the next item at regular intervals
-        setInterval(scrollToNextItem, scrollInterval);
+  // Auto scroll
+  let autoScroll = setInterval(nextItem, scrollInterval);
 
-        // Manual control via arrow buttons
-        document.getElementById('scroll-left').addEventListener('click', () => {
-            scrollToPreviousItem();
-        });
+  document.getElementById('scroll-right').addEventListener('click', () => {
+    clearInterval(autoScroll);
+    nextItem();
+    autoScroll = setInterval(nextItem, scrollInterval);
+  });
 
-        document.getElementById('scroll-right').addEventListener('click', () => {
-            scrollToNextItem();
-        });
-
-        // Ensure Item 1 starts on the left
-        scrollContent.style.transform = `translateX(0px)`;
-    </script>
+  document.getElementById('scroll-left').addEventListener('click', () => {
+    clearInterval(autoScroll);
+    previousItem();
+    autoScroll = setInterval(nextItem, scrollInterval);
+  });
+</script>
 
 
   <script>
