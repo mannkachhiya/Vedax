@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -237,24 +198,9 @@
       padding-top: 1px;
     }
 
-    /* Banner */
-    .banner {
-      width: 100%;
-      height: 150px;
-      background: linear-gradient(to right, #00c4cc, #ff6f61);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-family: Arial, sans-serif;
-      font-size: 2em;
-      text-align: center;
-    }
-
     /* New Left Image, Right Text Section */
     .image-text-container {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
       padding: 40px 20px;
@@ -265,16 +211,11 @@
 
     .image-left {
       flex: 1;
-      min-width: 0;
       padding-right: 20px;
-      max-width: 100%;
     }
 
     .text-right {
       flex: 1;
-      min-width: 0;
-      max-width: 100%;
-      text-align: center;
     }
 
     .section-image {
@@ -299,127 +240,6 @@
 
     .highlight {
       color: #209872;
-    }
-
-    /* Carousel Styles */
-    .scroll-container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 20px auto;
-      overflow: hidden;
-      position: relative;
-      background: linear-gradient(135deg, #ffffff, #f8f9fa);
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      padding: 30px 0;
-      animation: slideIn 1s ease-out;
-    }
-
-    .scroll-content {
-      display: flex;
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .scroll-item {
-      min-width: 300px;
-      margin: 0 15px;
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
-      opacity: 0;
-      animation: fadeIn 0.5s ease forwards;
-      animation-delay: calc(0.1s * var(--item-index));
-    }
-
-    .scroll-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-    }
-
-    .scroll-item img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-
-    .item-heading {
-      font-size: 22px;
-      font-weight: 600;
-      color: #333;
-      margin: 10px 0;
-    }
-
-    .item-description {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 15px;
-    }
-
-    .know-more-btn {
-      padding: 10px 25px;
-      background: linear-gradient(45deg, #eb9324, #209872);
-      color: white;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: 500;
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    .know-more-btn:hover {
-      background: linear-gradient(45deg, #d6821f, #1a7a5e);
-      transform: scale(1.05);
-    }
-
-    .scroll-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      border: none;
-      padding: 15px;
-      cursor: pointer;
-      font-size: 24px;
-      border-radius: 50%;
-      transition: background 0.3s ease, transform 0.3s ease;
-      z-index: 10;
-      animation: pulse 2s infinite;
-    }
-
-    .scroll-arrow:hover {
-      background: rgba(235, 147, 36, 0.8);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .scroll-arrow-left {
-      left: 20px;
-    }
-
-    .scroll-arrow-right {
-      right: 20px;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: translateY(-50%) scale(1); }
-      50% { transform: translateY(-50%) scale(1.05); }
     }
 
     /* Responsive Design */
@@ -495,21 +315,6 @@
       .section-text {
         font-size: 1rem;
       }
-
-      .scroll-item {
-        min-width: 280px;
-        margin: 0 10px;
-      }
-
-      .scroll-container {
-        padding: 20px 0;
-        margin: 20px auto;
-      }
-
-      .scroll-arrow {
-        padding: 12px;
-        font-size: 22px;
-      }
     }
 
     @media screen and (max-width: 480px) {
@@ -535,17 +340,164 @@
       .section-title {
         font-size: 1.8rem;
       }
-
-      .banner {
-        font-size: 1.5em;
-        height: 120px;
-      }
-
-      .scroll-item {
-        min-width: 260px;
-      }
     }
+    
+    .banner {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to right, #00c4cc, #ff6f61);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 2em;
+            text-align: center;
+        }
+        
+        
+        /*scroll*/
+                .scroll-container {
+            width: 100%;
+            max-width: 1500px;
+            margin: 0px auto;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+            padding: 0px 0;
+        }
+
+        .scroll-content {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scroll-item {
+            min-width: 300px;
+            margin: 0 15px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .scroll-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .scroll-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .item-heading {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .item-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .know-more-btn {
+            padding: 10px 25px;
+            background: linear-gradient(45deg, #007BFF, #00C4FF);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .know-more-btn:hover {
+            background: linear-gradient(45deg, #0056b3, #0096cc);
+            transform: scale(1.05);
+        }
+
+         .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 22px;
+            z-index: 10;
+        }
+
+        .scroll-arrow:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .scroll-arrow-left {
+            left: 20px;
+        }
+
+        .scroll-arrow-right {
+            right: 20px;
+        }
+        
+        
   </style>
+  
+  <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script>
+  
+  
 </head>
 <body>
   <!-- Information Bar -->
@@ -578,8 +530,8 @@
     </div>
     <div class="contact-info">
       <div class="contact-item">
-        <a href="/cdn-cgi/l/email-protection#5f363139301f293a3b3e272f373e2d323e713c3032" style="text-decoration: none;">
-          <span class="contact-icon">✉️</span> <span class="__cf_email__" data-cfemail="2a43444c456a5c4f4e4b525a424b58474b04494547">[email protected]</span>
+        <a href="mailto:info@vedaxpharma.com" style="text-decoration: none;">
+          <span class="contact-icon">✉️</span> info@vedaxpharma.com
         </a>
       </div>
       <div class="contact-item">
@@ -618,10 +570,13 @@
       <a class="prev" onclick="plusSlides(-1)" aria-label="Previous slide">❮</a>
       <a class="next" onclick="plusSlides(1)" aria-label="Next slide">❯</a>
     </div>
-
+    
+    
     <div class="banner">Clients may rely on us for highly effective range of products/Medicines which useful in the healthcare Industries.</div>
+    
+    
 
-    <!-- New Left Image, Right Text Section with Carousel -->
+    <!-- New Left Image, Right Text Section -->
     <div class="image-text-container" id="about">
       <div class="image-left">
         <img src="https://pikasopharma.in/site_img/index/about.jpg" alt="Vedax Pharma laboratory" class="section-image" loading="lazy">
@@ -629,105 +584,168 @@
       <div class="text-right">
         <h2 class="section-title"><span class="highlight">WELCOME TO</span> VEDEX PHARMA</h2><hr>
         <p style="font-size: 14px;" class="section-text">
-          At Vedax Pharma, we have built a solid reputation for providing the best range of goods for use in the pharmaceutical industry. Since the foundation of our business in 2007, we have gained a reputation as a reliable supplier and trader of a wide range of pharmaceutical-based products. Our extensive collection includes Respiratory care, Anti inflammatory care, skin care and G.I. care and many more. We assure our clients the best pricing for our highly effective products. In addition we observe ethics while conducting business with our customers.
-        </p>
+At Vedax Pharma, we have built a solid reputation for providing the best range of goods for use in the pharmacutial industry. Since the foundation of our business in 2007, we have gained a reputation as a reliable supplier and trader of a wide range of pharmaceutical-based products. Our extensive collection includes Respiratory care, Anti inflammatory care, skin care and G.I. care and many more. We assure our clients the best pricing for our highly effective products. In addition we observe ethics while conducting business with our customers.        </p>
       </div>
-      <!-- Auto Scroll Carousel -->
-      <div class="scroll-container" id="products">
+    </div>
+  </div>
+
+
+
+    <div class="scroll-container">
         <div class="scroll-content">
-          <!-- Product 1 -->
-          <div class="scroll-item" style="--item-index: 1;">
-            <img src="https://via.placeholder.com/300x200?text=Respiratory+Care" alt="Respiratory Care Product">
-            <div class="item-heading">Respiratory Care</div>
-            <div class="item-description">High-quality solutions for respiratory health.</div>
-            <button class="know-more-btn">Know More</button>
-          </div>
-          <!-- Product 2 -->
-          <div class="scroll-item" style="--item-index: 2;">
-            <img src="https://via.placeholder.com/300x200?text=Anti-Inflammatory" alt="Anti-Inflammatory Medicine">
-            <div class="item-heading">Anti-Inflammatory</div>
-            <div class="item-description">Effective relief for inflammation and pain.</div>
-            <button class="know-more-btn">Know More</button>
-          </div>
-          <!-- Product 3 -->
-          <div class="scroll-item" style="--item-index: 3;">
-            <img src="https://via.placeholder.com/300x200?text=Skin+Care" alt="Skin Care Product">
-            <div class="item-heading">Skin Care</div>
-            <div class="item-description">Advanced formulations for healthy skin.</div>
-            <button class="know-more-btn">Know More</button>
-          </div>
-          <!-- Product 4 -->
-          <div class="scroll-item" style="--item-index: 4;">
-            <img src="https://via.placeholder.com/300x200?text=G.I.+Care" alt="G.I. Care Product">
-            <div class="item-heading">G.I. Care</div>
-            <div class="item-description">Support for gastrointestinal wellness.</div>
-            <button class="know-more-btn">Know More</button>
-          </div>
-          <!-- Product 5 -->
-          <div class="scroll-item" style="--item-index: 5;">
-            <img src="https://via.placeholder.com/300x200?text=Cardiac+Care" alt="Cardiac Care Product">
-            <div class="item-heading">Cardiac Care</div>
-            <div class="item-description">Trusted products for heart health.</div>
-            <button class="know-more-btn">Know More</button>
-          </div>
-          <!-- Product 6 -->
-          <div class="scroll-item" style="--item-index: 6;">
-            <img src="https://via.placeholder.com/300x200?text=Neurological+Care" alt="Neurological Care Product">
-            <div class="item-heading">Neurological Care</div>
-            <div class="item-description">Innovative solutions for neurological health.</div>
-            <button class="know-more-btn">Know More</button>
-          </div>
-          <!-- Product 7 -->
-          <div class="scroll-item" style="--item-index: 7;">
-            <img src="https://via.placeholder.com/300x200?text=Orthopedic+Care" alt="Orthopedic Care Product">
-            <div class="item-heading">Orthopedic Care</div>
-            <div class="item-description">Support for bone and joint health.</div>
-            <button class="know-more-btn">Know More</button>
-          </div>
-          <!-- Product 8 -->
-          <div class="scroll-item" style="--item-index: 8;">
-            <img src="https://via.placeholder.com/300x200?text=Diabetic+Care" alt="Diabetic Care Product">
-            <div class="item-heading">Diabetic Care</div>
-            <div class="item-description">Effective management for diabetes.</div>
-            <button class="know-more-btn">Know More</button>
-          </div>
-          <!-- Product 9 -->
-          <div class="scroll-item" style="--item-index: 9;">
-            <img src="https://via.placeholder.com/300x200?text=Pediatric+Care" alt="Pediatric Care Product">
-            <div class="item-heading">Pediatric Care</div>
-            <div class="item-description">Gentle care for children's health.</div>
-            <button class="know-more-btn">Know More</button>
-          </div>
-          <!-- Product 10 -->
-          <div class="scroll-item" style="--item-index: 10;">
-            <img src="https://via.placeholder.com/300x200?text=General+Health" alt="General Health Product">
-            <div class="item-heading">General Health</div>
-            <div class="item-description">Comprehensive wellness solutions.</div>
-            <button class="know-more-btn">Know More</button>
-          </div>
+            <!-- Item 1 -->
+            <div class="scroll-item">
+                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 1">
+                <div class="item-heading">Item 1</div>
+                <div class="item-description">Discover the elegance of Item 1.</div>
+                <button class="know-more-btn">Know More</button>
+            </div>
+            <!-- Item 2 -->
+            <div class="scroll-item">
+                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 2">
+                <div class="item-heading">Item 2</div>
+                <div class="item-description">Experience the charm of Item 2.</div>
+                <button class="know-more-btn">Know More</button>
+            </div>
+            <!-- Item 3 -->
+            <div class="scroll-item">
+                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 3">
+                <div class="item-heading">Item 3</div>
+                <div class="item-description">Unleash creativity with Item 3.</div>
+                <button class="know-more-btn">Know More</button>
+            </div>
+            <!-- Item 4 -->
+            <div class="scroll-item">
+                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 4">
+                <div class="item-heading">Item 4</div>
+                <div class="item-description">Innovate with Item 4.</div>
+                <button class="know-more-btn">Know More</button>
+            </div>
+            <!-- Item 5 -->
+            <div class="scroll-item">
+                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 5">
+                <div class="item-heading">Item 5</div>
+                <div class="item-description">Transform with Item 5.</div>
+                <button class="know-more-btn">Know More</button>
+            </div>
+            <!-- Item 6 -->
+            <div class="scroll-item">
+                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 6">
+                <div class="item-heading">Item 6</div>
+                <div class="item-description">Inspire with Item 6.</div>
+                <button class="know-more-btn">Know More</button>
+            </div>
+            <!-- Item 7 -->
+            <div class="scroll-item">
+                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 7">
+                <div class="item-heading">Item 7</div>
+                <div class="item-description">Connect with Item 7.</div>
+                <button class="know-more-btn">Know More</button>
+            </div>
+            <!-- Item 8 -->
+            <div class="scroll-item">
+                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 8">
+                <div class="item-heading">Item 8</div>
+                <div class="item-description">Empower with Item 8.</div>
+                <button class="know-more-btn">Know More</button>
+            </div>
+            <!-- Item 9 -->
+            <div class="scroll-item">
+                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 9">
+                <div class="item-heading">Item 9</div>
+                <div class="item-description">Engage with Item 9.</div>
+                <button class="know-more-btn">Know More</button>
+            </div>
+            <!-- Item 10 -->
+            <div class="scroll-item">
+                <img src="https://pikasopharma.in/site_img/index/pro01.jpg" alt="Item 10">
+                <div class="item-heading">Item 10</div>
+                <div class="item-description">Celebrate with Item 10.</div>
+                <button class="know-more-btn">Know More</button>
+            </div>
         </div>
 
         <!-- Left Arrow -->
         <button class="scroll-arrow scroll-arrow-left" id="scroll-left">‹</button>
         <!-- Right Arrow -->
         <button class="scroll-arrow scroll-arrow-right" id="scroll-right">›</button>
-      </div>
     </div>
-  </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
+
+    <script>
+        const scrollContent = document.querySelector('.scroll-content');
+        const items = document.querySelectorAll('.scroll-item');
+        let currentIndex = 0;
+
+        // Set auto-scroll interval (every 3 seconds)
+        const scrollInterval = 3000;
+
+        // Function to scroll to the next item
+        function scrollToNextItem() {
+            if (currentIndex < items.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; // Loop back to the first item
+                scrollContent.style.transition = 'none'; // Disable transition for instant reset
+                scrollContent.style.transform = `translateX(0px)`;
+                // Force reflow to apply the transform without transition
+                scrollContent.offsetHeight;
+                scrollContent.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                return;
+            }
+            updateScrollPosition();
+        }
+
+        // Function to scroll to the previous item
+        function scrollToPreviousItem() {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = items.length - 1; // Loop to the last item
+                scrollContent.style.transition = 'none'; // Disable transition for instant reset
+                const itemWidth = items[0].offsetWidth + 30; // Width of an item + margin
+                scrollContent.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+                // Force reflow to apply the transform without transition
+                scrollContent.offsetHeight;
+                scrollContent.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            }
+            updateScrollPosition();
+        }
+
+        // Update the scroll position based on the current index
+        function updateScrollPosition() {
+            const itemWidth = items[0].offsetWidth + 30; // Width of an item + margin
+            scrollContent.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+        }
+
+        // Automatically scroll to the next item at regular intervals
+        setInterval(scrollToNextItem, scrollInterval);
+
+        // Manual control via arrow buttons
+        document.getElementById('scroll-left').addEventListener('click', () => {
+            scrollToPreviousItem();
+        });
+
+        document.getElementById('scroll-right').addEventListener('click', () => {
+            scrollToNextItem();
+        });
+
+        // Ensure Item 1 starts on the left
+        scrollContent.style.transform = `translateX(0px)`;
+    </script>
+
+
   <script>
     // Hamburger Menu
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
-    if (hamburger && navLinks) {
-      hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        const isExpanded = navLinks.classList.contains('active');
-        hamburger.setAttribute('aria-expanded', isExpanded);
-      });
-    }
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const isExpanded = navLinks.classList.contains('active');
+      hamburger.setAttribute('aria-expanded', isExpanded);
+    });
 
     // Slideshow
     let slideIndex = 1;
@@ -742,8 +760,7 @@
     }
 
     function showSlides(n) {
-      const slides = document.getElementsByClassName("mySlides");
-      if (!slides.length) return;
+      let slides = document.getElementsByClassName("mySlides");
       if (n > slides.length) slideIndex = 1;
       if (n < 1) slideIndex = slides.length;
       for (let i = 0; i < slides.length; i++) {
@@ -764,85 +781,9 @@
       clearInterval(autoSlideInterval);
     }
 
-    if (slideshow) {
-      slideshow.addEventListener('mouseenter', stopAutoSlide);
-      slideshow.addEventListener('mouseleave', startAutoSlide);
-      startAutoSlide();
-    }
-
-    // Auto Scroll Carousel
-    const scrollContent = document.querySelector('.scroll-content');
-    const items = document.querySelectorAll('.scroll-item');
-    const scrollLeftBtn = document.getElementById('scroll-left');
-    const scrollRightBtn = document.getElementById('scroll-right');
-    let currentIndex = 0;
-    let autoScrollInterval;
-
-    // Set auto-scroll interval (every 3 seconds)
-    const scrollInterval = 3000;
-
-    function scrollToNextItem() {
-      if (!scrollContent || !items.length) return;
-      if (currentIndex < items.length - 1) {
-        currentIndex++;
-      } else {
-        currentIndex = 0; // Loop back to the first item
-        scrollContent.style.transition = 'none'; // Disable transition for instant reset
-        scrollContent.style.transform = `translateX(0px)`;
-        scrollContent.offsetHeight; // Force reflow
-        scrollContent.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-        return;
-      }
-      updateScrollPosition();
-    }
-
-    function scrollToPreviousItem() {
-      if (!scrollContent || !items.length) return;
-      if (currentIndex > 0) {
-        currentIndex--;
-      } else {
-        currentIndex = items.length - 1; // Loop to the last item
-        scrollContent.style.transition = 'none'; // Disable transition for instant reset
-        const itemWidth = items[0].offsetWidth + 30; // Width of an item + margin
-        scrollContent.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-        scrollContent.offsetHeight; // Force reflow
-        scrollContent.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-      }
-      updateScrollPosition();
-    }
-
-    function updateScrollPosition() {
-      if (!scrollContent || !items.length) return;
-      const itemWidth = items[0].offsetWidth + 30; // Width of an item + margin
-      scrollContent.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-    }
-
-    function startAutoScroll() {
-      autoScrollInterval = setInterval(scrollToNextItem, scrollInterval);
-    }
-
-    function stopAutoScroll() {
-      clearInterval(autoScrollInterval);
-    }
-
-    if (scrollContent && items.length) {
-      // Initialize carousel
-      scrollContent.style.transform = `translateX(0px)`;
-      startAutoScroll();
-
-      // Pause auto-scroll on hover
-      scrollContent.addEventListener('mouseenter', stopAutoScroll);
-      scrollContent.addEventListener('mouseleave', startAutoScroll);
-
-      // Manual control via arrow buttons
-      if (scrollLeftBtn) {
-        scrollLeftBtn.addEventListener('click', scrollToPreviousItem);
-      }
-      if (scrollRightBtn) {
-        scrollRightBtn.addEventListener('click', scrollToNextItem);
-      }
-    }
+    slideshow.addEventListener('mouseenter', stopAutoSlide);
+    slideshow.addEventListener('mouseleave', startAutoSlide);
+    startAutoSlide();
   </script>
-  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9342f748fc61bfe8',t:'MTc0NTMwMjMwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
