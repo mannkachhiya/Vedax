@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="./imgs/favicon.ico">
+  <title>Available At</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      /*background-color: #e3e2e2;*/
+      background: linear-gradient(90deg, #eebb7a, #5bbe9e);
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      padding: 60px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .box {
+      background-blend-mode: overlay;
+      background-size: cover;
+      background-position: center;
+      border-radius: 15px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+    }
+
+    .box1 { background-image: url('https://www.shutterstock.com/image-illustration/vadodara-city-watercolor-panoramic-skyline-260nw-1056148649.jpg'); }
+    .box2 { background-image: url('https://www.shutterstock.com/image-vector/surat-city-water-color-vector-260nw-490537621.jpg'); }
+    .box3 { background-image: url('https://source.unsplash.com/300x200/?beach'); }
+    .box4 { background-image: url('https://source.unsplash.com/300x200/?city'); }
+    .box5 { background-image: url('https://source.unsplash.com/300x200/?desert'); }
+    .box6 { background-image: url('https://source.unsplash.com/300x200/?river'); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box box1">Vadodara</div>
+    <div class="box box2">Surat</div>
+    <div class="box box3">Vadodara</div>
+    <div class="box box4">Vadodara</div>
+    <div class="box box5">Vadodara</div>
+    <div class="box box6">Vadodara</div>
+  </div>
+</body>
+</html>
