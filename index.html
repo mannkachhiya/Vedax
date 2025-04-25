@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -173,6 +134,77 @@
             border: none;
             color: white;
             cursor: pointer;
+        }
+
+        /* Search Icon and Bar */
+        .nav-search {
+            position: relative;
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon {
+            font-size: 1.2rem;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .search-icon:hover {
+            color: #facc15;
+            transform: scale(1.1);
+        }
+
+        .search-bar {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .search-bar.active {
+            display: flex;
+            animation: searchExpand 0.3s ease-out forwards;
+        }
+
+        .search-bar input {
+            width: clamp(150px, 30vw, 250px);
+            padding: 0.5rem 2rem 0.5rem 2.5rem;
+            border: 2px solid #facc15;
+            border-radius: 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            outline: none;
+            background: white;
+            color: #1e3a8a;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color: #eb9324;
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+        }
+
+        .search-bar .fa-search {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1e3a8a;
+        }
+
+        .search-bar .clear-search {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #1e3a8a;
+            cursor: pointer;
+            font-size: 1rem;
+            display: none;
         }
 
         /* Slider Section */
@@ -533,8 +565,6 @@
             font-size: clamp(0.85rem, 2.5vw, 1rem);
         }
 
-        
-    /*img*/
         .social-links {
             display: flex;
             justify-content: center;
@@ -550,15 +580,6 @@
         .social-links img:hover {
             transform: scale(1.2);
         }
-
-
-        @media (max-width: 768px) {
-            .social-links img {
-                width: 25px;
-                height: 25px;
-            }
-        }
-
 
         /* Animations */
         @keyframes slideInLeft {
@@ -623,6 +644,11 @@
             100% { background: linear-gradient(rgba(235, 147, 36, 0.39), rgba(32, 152, 114, 0.41)); }
         }
 
+        @keyframes searchExpand {
+            0% { width: 0; opacity: 0; }
+            100% { width: clamp(150px, 30vw, 250px); opacity: 1; }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .hamburger {
@@ -652,6 +678,29 @@
 
             .get-in-touch {
                 margin: 10px 0;
+            }
+
+            .nav-search {
+                margin: 10px 0;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .search-bar {
+                position: relative;
+                top: auto;
+                transform: none;
+                width: 100%;
+            }
+
+            .search-bar.active {
+                display: flex;
+                width: 90%;
+                margin: 0 auto;
+            }
+
+            .search-bar input {
+                width: 100%;
             }
 
             .slider {
@@ -708,6 +757,11 @@
             .preloader-logo {
                 width: 120px; /* Smaller logo for mobile */
             }
+
+            .social-links img {
+                width: 25px;
+                height: 25px;
+            }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
@@ -716,6 +770,10 @@
             }
 
             .get-in-touch {
+                margin-left: 15px;
+            }
+
+            .nav-search {
                 margin-left: 15px;
             }
 
@@ -786,6 +844,14 @@
                 <a href="available">Available At</a>
                 <a href="contact.html">Contact</a>
                 <a href="#contact" class="get-in-touch">Get in Touch</a>
+                <div class="nav-search">
+                    <i class="fas fa-search search-icon" aria-label="Toggle search"></i>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="navSearchInput" placeholder="Search...">
+                        <button id="clearSearch" class="clear-search" aria-label="Clear search">✖</button>
+                    </div>
+                </div>
             </div>
         </nav>
     </header>
@@ -950,7 +1016,7 @@
     </div>
 
     <footer id="contact">
-        <p>© 2025 Vedax Pharma. All rights reserved. | Contact: <a href=""><span class="__cf_email__" data-cfemail="admin@test.com">admin@test.com</span></a> | +91 8045814454 | J-99, Radha Park Society, Vadodara, Gujarat, India</p>
+        <p>© 2025 Vedax Pharma. All rights reserved. | Contact: <a href=""><span class="__cf_email__" data-cfemail="admin@test.com"><span class="__cf_email__" data-cfemail="28494c454146685c4d5b5c064b4745">[email protected]</span></span></a> | +91 8045814454 | J-99, Radha Park Society, Vadodara, Gujarat, India</p>
         <div class="social-links">
             <a href="#"><img src="./imgs/facebook.png" alt="Facebook"></a>
             <a href="#"><img src="./imgs/whatsapp.png" alt="WhatsApp"></a>
@@ -959,7 +1025,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script type="text/javascript">
         var gk_isXlsx = false;
         var gk_xlsxFileLookup = {};
@@ -1008,6 +1074,65 @@
             navLinks.classList.toggle('active');
         });
 
+        // Search bar toggle functionality
+        const searchIcon = document.querySelector('.search-icon');
+        const searchBar = document.querySelector('.search-bar');
+        const navSearchInput = document.getElementById('navSearchInput');
+        const clearSearch = document.getElementById('clearSearch');
+
+        searchIcon.addEventListener('click', () => {
+            searchBar.classList.toggle('active');
+            if (searchBar.classList.contains('active')) {
+                navSearchInput.focus();
+            } else {
+                navSearchInput.value = '';
+                clearSearch.style.display = 'none';
+            }
+        });
+
+        // Search functionality with debounce
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        const performSearch = (query) => {
+            query = query.trim().toLowerCase().replace(/[^a-z0-9\s]/g, '');
+            if (query) {
+                window.location.href = `products.html?search=${encodeURIComponent(query)}`;
+            }
+        };
+
+        const debouncedSearch = debounce(performSearch, 300);
+
+        navSearchInput.addEventListener('input', () => {
+            const query = navSearchInput.value;
+            clearSearch.style.display = query ? 'block' : 'none';
+            debouncedSearch(query);
+        });
+
+        clearSearch.addEventListener('click', () => {
+            navSearchInput.value = '';
+            clearSearch.style.display = 'none';
+            navSearchInput.focus();
+        });
+
+        navSearchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                performSearch(navSearchInput.value);
+            }
+            if (e.key === 'Escape') {
+                clearSearch.click();
+            }
+        });
+
         // Slider functionality
         const slides = document.querySelectorAll('.slider-images img');
         let currentSlide = 0;
@@ -1023,11 +1148,8 @@
             showSlide(currentSlide);
         }
 
-        // Initialize first slide
         showSlide(currentSlide);
-
-        // Auto-slide every 5 seconds
         setInterval(nextSlide, 5000);
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93602047c9087bde',t:'MTc0NTYwODA3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
