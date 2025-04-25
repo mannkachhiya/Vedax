@@ -494,17 +494,32 @@
             font-size: clamp(0.85rem, 2.5vw, 1rem);
         }
 
-        .social-links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            transition: color 0.3s ease;
-            font-size: clamp(0.85rem, 2.5vw, 1rem);
+        /*img*/
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .social-links a:hover {
-            color: #facc15;
+        .social-links img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s ease;
         }
+
+        .social-links img:hover {
+            transform: scale(1.2);
+        }
+
+
+        @media (max-width: 768px) {
+            .social-links img {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+
 
         /* Animations */
         @keyframes slideInLeft {
@@ -893,12 +908,12 @@
     </div>
 
     <footer id="contact">
-        <p>© 2025 Vedax Pharma. All rights reserved. | Contact: <a href="/cdn-cgi/l/email-protection#5d34333b321d2b38393c252d353c2f303c733e3230"><span class="__cf_email__" data-cfemail="547d7a727b54627170756c647c756679753a777b79">[email protected]</span></a> | +91 8045814454 | J-99, Radha Park Society, Vadodara, Gujarat, India</p>
+        <p>© 2025 Vedax Pharma. All rights reserved. | Contact: <a href=""><span class="__cf_email__" data-cfemail="admin@test.com">admin@test.com</span></a> | +91 8045814454 | J-99, Radha Park Society, Vadodara, Gujarat, India</p>
         <div class="social-links">
-            <a href="#">Facebook</a>
-            <a href="#">Whatsapp</a>
-            <a href="#">Instagram</a>
-            <a href="">Threads</a>
+            <a href="#"><img src="./imgs/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="./imgs/whatsapp.png" alt="WhatsApp"></a>
+            <a href="#"><img src="./imgs/instagram.png" alt="Instagram"></a>
+            <a href="#"><img src="./imgs/threads.png" alt="Threads"></a>
         </div>
     </footer>
 
