@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Products - Vedax Pharma</title>
+  <link rel="icon" type="image/x-icon" href="../imgs/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f4f7fc;
+    overflow-x: hidden;
+}
+
+.logo {
+    width: 180px;
+    height: auto;
+}
+
+/* Header */
+header {
+    background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation */
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Navigation links */
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    position: relative;
+    transition: color 0.3s ease;
+    font-size: clamp(0.9rem, 3vw, 1rem);
+}
+
+.nav-links a.active {
+    color: #facc15;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #facc15;
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: #facc15;
+}
+
+/* Search */
+.nav-search {
+    position: relative;
+    margin-left: 20px;
+    animation: searchpop 1s ease-out;
+}
+
+.nav-search input {
+    width: clamp(150px, 30vw, 250px);
+    padding: 0.5rem 2rem 0.5rem 2.5rem;
+    border: 2px solid #eb9324;
+    border-radius: 25px;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    outline: none;
+    background: white;
+    color: #eb9324;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-search input:focus {
+    border-color: #facc15;
+    box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+}
+
+.nav-search .fa-search {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #1e3a8a;
+}
+
+.nav-search .clear-search {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #eb9324;
+    cursor: pointer;
+    font-size: 1rem;
+    display: none;
+}
+
+/* Get in Touch Button */
+.get-in-touch {
+    background: #facc15;
+    color: #eb9324;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-left: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.get-in-touch:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Products Section */
+.products {
+    margin: 5rem 0 3rem;
+    padding: 0;
+    text-align: center;
+    min-height: calc(100vh - 180px);
+}
+
+.products h2 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    margin-bottom: 1rem;
+    margin-top: 10px;
+    color: #1e3a8a;
+    animation: fadein 1s ease-in, textreveal 1.5s ease-out;
+}
+
+.product-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.product-card {
+    background: white;
+    padding: 1.5rem 0;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    animation: flipin 0.8s ease-out;
+    width: 90vw;
+    margin: 0 auto;
+}
+
+.product-card.hidden {
+    display: none;
+}
+
+.product-card:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    animation: scaleglow 1s ease-in-out infinite;
+}
+
+.product-card-content {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.product-card img {
+    width: 280px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+.product-text {
+    flex: 1;
+    text-align: left;
+}
+
+.product-card h3 {
+    font-size: clamp(1.2rem, 3vw, 1.4rem);
+    margin: 0 0 0.5rem;
+    color: #1e3a8a;
+}
+
+.product-card p {
+    color: #4b5563;
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+}
+
+.no-results {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    color: #4b5563;
+    text-align: center;
+    margin: 2rem 0;
+    display: none;
+    animation: fadein 0.8s ease-in;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+    color: white;
+    padding: 1.5rem 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.footer-section {
+    margin: 0.5rem 0;
+    max-width: 40%;
+}
+
+.footer-section h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.footer-section p {
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+}
+
+.read-more {
+    background: #2dd4bf;
+    color: #1e3a8a;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.read-more:hover {
+    background-color: #facc15;
+    transform: scale(1.05);
+    color: #eb9324;
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.social-links img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.social-links img:hover {
+    transform: scale(1.2);
+}
+
+/* Animations */
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes flipin {
+    from { opacity: 0; transform: perspective(400px) rotateY(-90deg); }
+    to { opacity: 1; transform: perspective(400px) rotateY(0deg); }
+}
+
+@keyframes scaleglow {
+    0%, 100% { transform: translateY(-10px) rotate(2deg); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
+    50% { transform: translateY(-12px) rotate(2deg); box-shadow: 0 8px 20px rgba(250, 204, 21, 0.5); }
+}
+
+@keyframes textreveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes searchpop {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 77.2px;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+        padding: 1rem 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .products {
+        margin: 4rem 0 2rem;
+    }
+
+    .product-card-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .product-text {
+        text-align: center;
+    }
+}
+
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <img src="../imgs/logo.png" alt="Vedax Pharma" class="logo">
+    <button class="hamburger" aria-label="Toggle menu">☰</button>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="" class="active">Products</a>
+      <a href="../about.html">About</a>
+      <a href="../available/">Available At</a>
+      <a href="../contact.html">Contact</a>
+      <a href="../get.html" class="get-in-touch">Get in Touch</a>
+      <div class="nav-search">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input type="text" id="navSearchInput" placeholder="Search Products..." aria-label="Search products">
+        <button class="clear-search" id="clearSearch" aria-label="Clear search">✖</button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<section class="products" id="products">
+  <h2>Our Products</h2>
+  <div class="product-grid" id="productGrid">
+    <!-- Product Cards -->
+    <div class="product-card">
+      <div class="product-card-content">
+        <img loading="lazy" src="https://i.redd.it/xw92mup1p0071.jpg" alt="Cetirizine Tablets">
+        <div class="product-text">
+          <h3>Cetirizine Dihydrochloride Tablets</h3>
+          <p>Non-drowsy, fast-acting relief for allergies and respiratory conditions, trusted by millions.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-card-content">
+        <img loading="lazy" src="https://source.unsplash.com/300x200/?cream,tube" alt="Clotrimazole Cream">
+        <div class="product-text">
+          <h3>Clotrimazole Cream</h3>
+          <p>Clinically proven antifungal cream for rapid treatment of skin infections.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-card-content">
+        <img loading="lazy" src="https://source.unsplash.com/300x200/?powder,bottle" alt="Dusting Powder">
+        <div class="product-text">
+          <h3>Dusting Powder</h3>
+          <p>Long-lasting protection against skin irritations and rashes, gentle on sensitive skin.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-card-content">
+        <img loading="lazy" src="https://source.unsplash.com/300x200/?gel,tube" alt="Anti-Inflammatory Gel">
+        <div class="product-text">
+          <h3>Anti-Inflammatory Gel</h3>
+          <p>Fast-absorbing gel for targeted pain and inflammation relief, enhancing mobility.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-card-content">
+        <img loading="lazy" src="https://source.unsplash.com/300x200/?spray,medicine" alt="Pain Relief Spray">
+        <div class="product-text">
+          <h3>Pain Relief Spray</h3>
+          <p>Instant-cooling spray for muscle and joint pain, providing quick and lasting relief.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-results" id="noResults">No results found.</div>
+</section>
+
+<footer>
+  <div class="footer-section">
+    <h3>ABOUT US</h3>
+    <p>Our company, Vedax Pharma, has had a long but fruitful journey during which we have successfully consolidated our market position.</p>
+    <a href="../about.html" class="read-more">Read More</a>
+  </div>
+  <div class="footer-section">
+    <h3>CONTACT US</h3>
+    <p>J-99, Radha Park Society, Opp. Sardar Estate, New VIP Road, Vadodara - 390019, Gujarat, India.</p>
+    <p>+91 63591 57356</p>
+    <p>info@vedaxpharma.com</p>
+    <div class="social-links">
+      <a href="https://www.facebook.com/share/191Quj18k5/?mibextid=wwXIfr"><img loading="lazy" src="../imgs/facebook.png" alt="Facebook"></a>
+      <a href="https://wa.me/916359157356"><img loading="lazy" src="../imgs/whatsapp.png" alt="WhatsApp"></a>
+      <a href="https://www.instagram.com/vedaxpharmaofficial/"><img loading="lazy" src="../imgs/instagram.png" alt="Instagram"></a>
+      <a href="https://www.threads.net/@vedaxpharmaofficial"><img loading="lazy" src="../imgs/threads.png" alt="Threads"></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hamburger toggle
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  // Search functionality with debounce
+  const navSearchInput = document.getElementById('navSearchInput');
+  const clearSearch = document.getElementById('clearSearch');
+  const productGrid = document.getElementById('productGrid');
+  const productCards = productGrid.querySelectorAll('.product-card');
+  const noResults = document.getElementById('noResults');
+
+  function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
+
+  const performSearch = (query) => {
+    query = query.trim().toLowerCase();
+    let hasResults = false;
+    productCards.forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      const description = card.querySelector('p').textContent.toLowerCase();
+      const matches = title.includes(query) || description.includes(query);
+      if (matches) {
+        card.classList.remove('hidden');
+        hasResults = true;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    noResults.style.display = hasResults || !query ? 'none' : 'block';
+    clearSearch.style.display = query ? 'block' : 'none';
+  };
+
+  const debouncedSearch = debounce(performSearch, 300);
+  navSearchInput.addEventListener('input', () => debouncedSearch(navSearchInput.value));
+  clearSearch.addEventListener('click', () => {
+    navSearchInput.value = '';
+    productCards.forEach(card => card.classList.remove('hidden'));
+    noResults.style.display = 'none';
+    clearSearch.style.display = 'none';
+  });
+  navSearchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') performSearch(navSearchInput.value);
+    if (e.key === 'Escape') clearSearch.click();
+  });
+</script>
+
+</body>
+</html>
