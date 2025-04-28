@@ -549,37 +549,75 @@
     }
 
     /* Footer */
-    footer {
-        background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
-        color: white;
-        text-align: center;
-        padding: 1.5rem 20px;
-    }
+        footer {
+            background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+            color: white;
+            padding: 1.5rem 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            text-align: center;
+        }
 
-    footer p, .social-links {
-        animation: fadeWave 1s ease-out;
-    }
+        .footer-section {
+            margin: 0.5rem 0;
+            max-width: 40%;
+        }
 
-    footer p {
-        margin: 0 0 0.5rem;
-        font-size: clamp(0.85rem, 2.5vw, 1rem);
-    }
+        .footer-section h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
 
-    .social-links {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
+        .footer-section p {
+            margin: 0 0 0.5rem;
+            font-size: 0.9rem;
+        }
 
-    .social-links img {
-        width: 30px;
-        height: 30px;
-        transition: transform 0.3s ease;
-    }
+        .read-more {
+            background: #2dd4bf;
+            color: #1e3a8a;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
 
-    .social-links img:hover {
-        transform: scale(1.2);
-    }
+        .read-more:hover {
+            background-color: #facc15;
+            transform: scale(1.05);
+            color: #eb9324;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        .social-links img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links img:hover {
+            transform: scale(1.2);
+        }
 
     /* Animations */
     @keyframes slideInLeft {
@@ -1024,16 +1062,25 @@
     </div>
 </div>
 
-<footer id="contact">
-    <p>© 2025 Vedax Pharma. All rights reserved. | Contact: <a href="mailto:info@vedaxpharma.com">info@vedaxpharma.com</a> | +91 8045814454 | Vadodara, Gujarat, India | GST No.: 24BTEPS7498J1ZW</p>
-    <div class="social-links">
-        <a href="#"><img src="./imgs/facebook.png" alt="Facebook"></a>
-        <a href="#"><img src="./imgs/whatsapp.png" alt="WhatsApp"></a>
-        <a href="#"><img src="./imgs/instagram.png" alt="Instagram"></a>
-        <a href="#"><img src="./imgs/threads.png" alt="Threads"></a>
-    </div>
-</footer>
-
+<footer>
+        <div class="footer-section">
+            <h3>ABOUT US</h3>
+            <p>Our company, Vedax Pharma, has had a long but fruitful journey during which we have successfully consolidated our market position.</p>
+            <a href="../about.html" class="read-more">Read More</a>
+        </div>
+        <div class="footer-section">
+            <h3>CONTACT US</h3>
+            <p>J-99, Radha Park Society, Opp. Sardar Estate, New VIP Road, Vadodara - 390019, Gujarat, India.</p>
+            <p>+91 63591 57356</p>
+            <p>info@vedaxpharma.com</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/191Quj18k5/?mibextid=wwXIfr"><img src="../imgs/facebook.png" alt="Facebook"></a>
+                <a href="https://wa.me/916359157356"><img src="../imgs/whatsapp.png" alt="WhatsApp"></a>
+                <a href="https://www.instagram.com/vedaxpharmaofficial/"><img src="../imgs/instagram.png" alt="Instagram"></a>
+                <a href="https://www.threads.com/@vedaxpharmaofficial"><img src="../imgs/threads.png" alt="Threads"></a>
+            </div>
+        </div>
+    </footer>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script type="text/javascript">
     var gk_isXlsx = false;
