@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available At - Vedax Pharma</title>
+    <link rel="icon" type="image/x-icon" href="../../imgs/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #e6f0ff;
+            overflow-x: hidden;
+        }
+
+        .logo {
+        width: 180px;
+        height: auto;
+        }
+
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            position: relative;
+            transition: color 0.3s ease;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+
+        .nav-links a.active {
+            color: #facc15;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #facc15;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #facc15;
+        }
+
+        .nav-search {
+            position: relative;
+            margin-left: 20px;
+            animation: searchpop 1s ease-out;
+        }
+
+        .nav-search input {
+            width: clamp(150px, 30vw, 250px);
+            padding: 0.5rem 2rem 0.5rem 2.5rem;
+            border: 2px solid #eb9324;
+            border-radius: 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            outline: none;
+            background: white;
+            color: #eb9324;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-search input:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+        }
+
+        .nav-search .fa-search {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1e3a8a;
+        }
+
+        .nav-search .clear-search {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #eb9324;
+            cursor: pointer;
+            font-size: 1rem;
+            display: none;
+        }
+
+        .get-in-touch {
+        background: #facc15;
+        color: #eb9324;
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        margin-left: 25px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .get-in-touch:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+    }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* About Section */
+        .about {
+            max-width: 1200px;
+            margin: 5rem auto 3rem;
+            padding: 0 20px;
+            min-height: calc(100vh - 180px);
+        }
+
+
+        .about-key-facts {
+            margin: 2rem 0;
+            animation: slideup 1s ease-out;
+        }
+
+        .about-key-facts h1 {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            color: #eb9324;
+            margin-bottom: 1rem;
+            animation: fadein 1s ease-in;
+            text-align: center;
+        }
+        
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .fact-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: flipin 0.8s ease-out;
+            background-color: #2dd4be4a; /*color_box*/
+        }
+
+        .fact-card:nth-child(1) { animation-delay: 0.2s; }
+        .fact-card:nth-child(2) { animation-delay: 0.4s; }
+        .fact-card:nth-child(3) { animation-delay: 0.6s; }
+        .fact-card:nth-child(4) { animation-delay: 0.8s; }
+        .fact-card:nth-child(5) { animation-delay: 1.0s; }
+
+        .fact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .fact-card h3 {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            color: #eb9324;
+            margin-bottom: 0.5rem;
+        }
+
+        .fact-card p {
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+            color: #1e3a8a;
+            font-weight: bold;
+        }
+
+        a {
+        text-decoration: none;
+        }
+
+        /* Footer Styles */
+footer {
+    background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+    color: white;
+    padding: 1.5rem 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.footer-section {
+    margin: 0.5rem 0;
+    max-width: 40%;
+}
+
+.footer-section h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.footer-section p {
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+}
+
+.read-more {
+    background: #2dd4bf;
+    color: #1e3a8a;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.read-more:hover {
+    background-color: #facc15;
+    transform: scale(1.05);
+    color: #eb9324;
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.social-links a {
+    color: white;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.2);
+}
+
+/* Responsive Design for Footer */
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .footer-section {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .social-links a {
+        font-size: 1.2rem;
+    }
+}
+
+    .social-links img {
+        width: 30px;
+        height: 30px;
+        transition: transform 0.3s ease;
+    }
+
+    .social-links img:hover {
+        transform: scale(1.2);
+    }
+
+        /* Animations */
+        @keyframes capsulespin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideup {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes flipin {
+            from { opacity: 0; transform: perspective(400px) rotateY(-90deg); }
+            to { opacity: 1; transform: perspective(400px) rotateY(0deg); }
+        }
+
+        @keyframes scaleglow {
+            0%, 100% { box-shadow: 0 0 15px rgba(250, 204, 21, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(250, 204, 21, 0.8); }
+        }
+
+        @keyframes fadewave {
+            0% { opacity: 0; transform: translateY(10px) skewY(3deg); }
+            50% { opacity: 0.5; transform: translateY(5px) skewY(-3deg); }
+            100% { opacity: 1; transform: translateY(0) skewY(0); }
+        }
+
+        @keyframes searchpop {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 77.2px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+                padding: 1rem 0;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 10px 0;
+                font-size: 1.2rem;
+            }
+
+            .nav-search {
+                margin: 10px 0;
+                width: 90%;
+            }
+
+            .nav-search input {
+                width: 100%;
+            }
+
+            .about {
+                margin: 4rem auto 2rem;
+                padding: 0 15px;
+            }
+
+            .facts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .fact-card {
+                animation: fadein 0.8s ease-out;
+            }
+
+            .social-links img {
+                width: 25px;
+                height: 25px;
+            }
+        }
+        
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-links a {
+                margin-left: 15px;
+            }
+
+            .nav-search {
+                margin-left: 15px;
+            }
+
+            .nav-search input {
+                width: clamp(120px, 25vw, 200px);
+            }
+
+            .facts-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    
+
+    <header>
+        <nav>
+            <img src="../../imgs/logo.png" alt="Vedax Pharma" class="logo">
+        <button class="hamburger" aria-label="Toggle menu">☰</button>
+        <div class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../products">Products</a>
+            <a href="../../about.html">About</a>
+            <a href="../"  class="active">Available At</a>
+            <a href="../../contact.html">Contact</a>
+            <a href="../../get.html" class="get-in-touch" onMouseOver="this.style.color='#1e3a8a'" onMouseOut="this.style.color='#fff'">Get in Touch</a>
+                <div class="nav-search">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <input type="text" id="navSearchInput" placeholder="Search Products..." aria-label="Search products">
+                    <button class="clear-search" id="clearSearch" aria-label="Clear search">✖</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="about" id="about">
+        <div class="about-key-facts">
+            <br><h1>Surat</h1><br>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <a href="areth.html"><p>ARETH</p></a>
+                </div>
+                <div class="fact-card">
+                    <a href="kevdi.html"><p>KEVDI</p></a>
+                </div>
+                <div class="fact-card">
+                    <a href="mandvi.html"><p>MANDVI</p></a>
+                </div>
+                <div class="fact-card">
+                    <a href="mangrol.html"><p>MANGROL(MOSALI)</p></a>
+                </div>
+                <div class="fact-card">
+                    <a href="umarpada.html"><p>UMARPADA</p></a>
+                </div>
+                <div class="fact-card">
+                    <a href="vankal.html"><p>VANKAL</p></a>
+                </div>
+                <div class="fact-card">
+                    <a href="zankhvav.html"><p>ZANKHVAV</p></a>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="footer-section">
+            <h3>ABOUT US</h3>
+            <p>Our company, Vedax Pharma, has had a long but fruitful journey during which we have successfully consolidated our market position.</p>
+            <a href="../../about.html" class="read-more">Read More</a>
+        </div>
+        <div class="footer-section">
+            <h3>CONTACT US</h3>
+            <p>J-99, Radha Park Society, Opp. Sardar Estate, New VIP Road, Vadodara - 390019, Gujarat, India.</p>
+            <p>+91 63591 57356</p>
+            <p>info@vedaxpharma.com</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/share/191Quj18k5/?mibextid=wwXIfr"><img src="../../imgs/facebook.png" alt="Facebook"></a>
+            <a href="https://wa.me/916359157356"><img src="../../imgs/whatsapp.png" alt="WhatsApp"></a>
+            <a href="https://www.instagram.com/vedaxpharmaofficial/"><img src="../../imgs/instagram.png" alt="Instagram"></a>
+            <a href="https://www.threads.com/@vedaxpharmaofficial"><img src="../../imgs/threads.png" alt="Threads"></a>
+        </div>
+    </footer>
+
+    <script>
+        
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Search functionality with debounce
+        const navSearchInput = document.getElementById('navSearchInput');
+        const clearSearch = document.getElementById('clearSearch');
+
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Search function (redirects to products page)
+        const performSearch = (query) => {
+            query = query.trim().toLowerCase().replace(/[^a-z0-9\s]/g, '');
+            if (query) {
+                window.location.href = `products.html?search=${encodeURIComponent(query)}`;
+            }
+        };
+
+        // Debounced search
+        const debouncedSearch = debounce(performSearch, 300);
+
+        // Search input event
+        navSearchInput.addEventListener('input', () => {
+            const query = navSearchInput.value;
+            clearSearch.style.display = query ? 'block' : 'none';
+            debouncedSearch(query);
+        });
+
+        // Clear search
+        clearSearch.addEventListener('click', () => {
+            navSearchInput.value = '';
+            clearSearch.style.display = 'none';
+            navSearchInput.focus();
+        });
+
+        // Keyboard accessibility for search
+        navSearchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                performSearch(navSearchInput.value);
+            }
+            if (e.key === 'Escape') {
+                clearSearch.click();
+            }
+        });
+    </script>
+</body>
+</html>
