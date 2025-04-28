@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products - Vedax Pharma</title>
+    <link rel="icon" type="image/x-icon" href="../imgs/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f4f7fc;
+            overflow-x: hidden;
+        }
+
+        .logo {
+            width: 180px;
+            height: auto;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            position: relative;
+            transition: color 0.3s ease;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+
+        .nav-links a.active {
+            color: #facc15;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #facc15;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #facc15;
+        }
+
+        .nav-search {
+            position: relative;
+            margin-left: 20px;
+            animation: searchpop 1s ease-out;
+        }
+
+        .nav-search input {
+            width: clamp(150px, 30vw, 250px);
+            padding: 0.5rem 2rem 0.5rem 2.5rem;
+            border: 2px solid #eb9324;
+            border-radius: 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            outline: none;
+            background: white;
+            color: #eb9324;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-search input:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+        }
+
+        .nav-search .fa-search {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1e3a8a;
+        }
+
+        .nav-search .clear-search {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #eb9324;
+            cursor: pointer;
+            font-size: 1rem;
+            display: none;
+        }
+
+        .get-in-touch {
+            background: #facc15;
+            color: #eb9324;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-left: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .get-in-touch:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Products Section */
+        .products {
+            margin: 5rem 0 3rem;
+            padding: 0;
+            text-align: center;
+            min-height: calc(100vh - 180px);
+        }
+
+        .products h2 {
+            font-size: clamp(1rem, 5vw, 2rem);
+            color: #1e3a8a;
+            animation: fadein 1s ease-in, textreveal 1.5s ease-out;
+        }
+
+        .products h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            margin-bottom: 2rem;
+            color: #1e3a8a;
+            animation: fadein 1s ease-in, textreveal 1.5s ease-out;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: white;
+            padding: 1.5rem 0; /* Vertical padding only */
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            width: 90vw; /* 90% of viewport width */
+            margin: 0 auto; /* Center the card */
+        }
+
+        .product-card.hidden {
+            display: none;
+        }
+
+        
+
+        .product-card:hover {
+            /*transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);*/
+            transform: translateY(-5px); /* Optional: Add a lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+        }
+
+        .product-card-content {
+            max-width: 1500px; /* Constrain content width */
+            margin: 0 auto; /* Center content */
+            padding: 0 20px; /* Internal padding */
+            display: flex;
+            align-items: center; /* Vertically center image and text */
+            gap: 40px; /* Space between image and text */
+        }
+
+        .product-card img {
+            width: 300px; /* Fixed width for image */
+            height: 350px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .product-card:hover img {
+            /*transform: scale(1.1);
+            filter: brightness(1.1);*/
+        }
+
+        .product-text {
+            flex: 1; /* Take remaining space */
+            text-align: left; /* Align text to the left */
+        }
+
+        .product-card h3 {
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            margin: 0 0 0.5rem;
+            color: #1e3a8a;
+        }
+
+        .product-card p {
+            color: #4b5563;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+        }
+
+        .no-results {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: #4b5563;
+            text-align: center;
+            margin: 2rem 0;
+            display: none;
+            animation: fadein 0.8s ease-in;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+            color: white;
+            padding: 1.5rem 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .footer-section {
+            margin: 0.5rem 0;
+            max-width: 40%;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            margin: 0 0 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .read-more {
+            background: #2dd4bf;
+            color: #1e3a8a;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .read-more:hover {
+            background-color: #facc15;
+            transform: scale(1.05);
+            color: #eb9324;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        .social-links img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links img:hover {
+            transform: scale(1.2);
+        }
+
+        /* Animations */
+        @keyframes capsulespin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes flipin {
+            from { opacity: 0; transform: perspective(400px) rotateY(-90deg); }
+            to { opacity: 1; transform: perspective(400px) rotateY(0deg); }
+        }
+
+        @keyframes scaleglow {
+            0%, 100% { transform: translateY(-10px) rotate(2deg); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
+            50% { transform: translateY(-12px) rotate(2deg); box-shadow: 0 8px 20px rgba(250, 204, 21, 0.5); }
+        }
+
+        @keyframes textreveal {
+            from { clip-path: inset(0 100% 0 0); }
+            to { clip-path: inset(0 0 0 0); }
+        }
+
+        @keyframes fadewave {
+            0% { opacity: 0; transform: translateY(10px) skewY(3deg); }
+            50% { opacity: 0.5; transform: translateY(5px) skewY(-3deg); }
+            100% { opacity: 1; transform: translateY(0) skewY(0); }
+        }
+
+        @keyframes searchpop {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 77.2px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+                padding: 1rem 0;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 10px 0;
+                font-size: 1.2rem;
+            }
+
+            .nav-search {
+                margin: 10px 0;
+                width: 90%;
+            }
+
+            .nav-search input {
+                width: 100%;
+            }
+
+            .products {
+                margin: 4rem 0 2rem;
+                padding: 0;
+            }
+
+            .product-grid {
+                gap: 1rem;
+            }
+
+            .product-card {
+                padding: 1rem 0;
+                width: 90vw; /* 90% of viewport width on mobile */
+                margin: 0 auto; /* Center the card */
+            }
+
+            .product-card-content {
+                padding: 0 15px;
+                flex-direction: column; /* Stack image and text vertically */
+                align-items: center; /* Center items */
+                gap: 10px;
+            }
+
+            .product-card img {
+                width: 100%;
+                max-width: 290px;
+                height: 350px;
+            }
+
+            .product-text {
+                text-align: center; /* Center text on mobile */
+            }
+
+            
+            .products h1 {
+                animation: fadein 1s ease-in;
+            }
+            
+            .products h2 {
+                animation: fadein 1s ease-in;
+            }
+
+            .product-card {
+                animation: fadein 0.8s ease-out;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-links a {
+                margin-left: 15px;
+            }
+
+            .nav-search {
+                margin-left: 15px;
+            }
+
+            .nav-search input {
+                width: clamp(120px, 25vw, 200px);
+            }
+
+            .product-card img {
+                width: 290px;
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="../imgs/logo.png" alt="Vedax Pharma" class="logo">
+            <button class="hamburger" aria-label="Toggle menu">☰</button>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="" class="active">Products</a>
+                <a href="../about.html">About</a>
+                <a href="../available/">Available At</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../get.html" class="get-in-touch" onMouseOver="this.style.color='#1e3a8a'" onMouseOut="this.style.color='#fff'">Get in Touch</a>
+                <div class="nav-search">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <input type="text" id="navSearchInput" placeholder="Search Products..." aria-label="Search products">
+                    <button class="clear-search" id="clearSearch" aria-label="Clear search">✖</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="products" id="products">
+        <br>
+        <h1>Our Products</h1>
+        <h2>Tablets</h2><br>
+        <div class="product-grid" id="productGrid">
+            <div class="product-card">
+                <div class="product-card-content">
+                    <img src="https://i.redd.it/xw92mup1p0071.jpg" alt="Cetirizine Tablets">
+                    <div class="product-text">
+                        <h3>Cetirizine Dihydrochloride Tablets</h3>
+                        <p>Our company, Vedax Pharma, has had a long but fruitful journey during which we have successfully consolidated our market position. Over the years, we have put a tremendous amount of effort to get where we are now. We owe it due to confidence of our clients in us.</p>
+
+<p>Our entire product range, which includes Respiratory care, Anti-inflammatory care, Skin care, and G.I. Care, etc., has received appreciations from our customers for quality and effectiveness of our products. Additionally, our facility, which is based in the city of Vadodara, Gujarat, India, allows us to quickly and securely deliver our quality products to clients.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-card-content">
+                    <img src="https://source.unsplash.com/300x200/?cream,tube" alt="Clotrimazole Cream">
+                    <div class="product-text">
+                        <h3>Clotrimazole Cream</h3>
+                        <p>Clinically proven antifungal cream for rapid treatment of skin infections.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-card-content">
+                    <img src="https://source.unsplash.com/300x200/?powder,bottle" alt="Dusting Powder">
+                    <div class="product-text">
+                        <h3>Dusting Powder</h3>
+                        <p>Long-lasting protection against skin irritations and rashes, gentle on sensitive skin.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-card-content">
+                    <img src="https://source.unsplash.com/300x200/?gel,tube" alt="Anti-Inflammatory Gel">
+                    <div class="product-text">
+                        <h3>Anti-Inflammatory Gel</h3>
+                        <p>Fast-absorbing gel for targeted pain and inflammation relief, enhancing mobility.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-card-content">
+                    <img src="https://source.unsplash.com/300x200/?spray,medicine" alt="Pain Relief Spray">
+                    <div class="product-text">
+                        <h3>Pain Relief Spray</h3>
+                        <p>Instant-cooling spray for muscle and joint pain, providing quick and lasting relief.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="no-results" id="noResults">No results found.</div>
+    </section>
+
+    <footer>
+        <div class="footer-section">
+            <h3>ABOUT US</h3>
+            <p>Our company, Vedax Pharma, has had a long but fruitful journey during which we have successfully consolidated our market position.</p>
+            <a href="../about.html" class="read-more">Read More</a>
+        </div>
+        <div class="footer-section">
+            <h3>CONTACT US</h3>
+            <p>J-99, Radha Park Society, Opp. Sardar Estate, New VIP Road, Vadodara - 390019, Gujarat, India.</p>
+            <p>+91 63591 57356</p>
+            <p>info@vedaxpharma.com</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/191Quj18k5/?mibextid=wwXIfr"><img src="../imgs/facebook.png" alt="Facebook"></a>
+                <a href="https://wa.me/916359157356"><img src="../imgs/whatsapp.png" alt="WhatsApp"></a>
+                <a href="https://www.instagram.com/vedaxpharmaofficial/"><img src="../imgs/instagram.png" alt="Instagram"></a>
+                <a href="https://www.threads.com/@vedaxpharmaofficial"><img src="../imgs/threads.png" alt="Threads"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        // Hide preloader after page load
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+            }, 1500);
+        });
+
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Search functionality with debounce
+        const navSearchInput = document.getElementById('navSearchInput');
+        const clearSearch = document.getElementById('clearSearch');
+        const productGrid = document.getElementById('productGrid');
+        const productCards = productGrid.querySelectorAll('.product-card');
+        const noResults = document.getElementById('noResults');
+
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Search function
+        const performSearch = (query) => {
+            query = query.trim().toLowerCase().replace(/[^a-z0-9\s]/g, '');
+            let hasResults = false;
+
+            productCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                const matches = title.includes(query) || description.includes(query);
+
+                if (matches) {
+                    card.classList.remove('hidden');
+                    card.style.animation = 'none';
+                    hasResults = true;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            noResults.style.display = hasResults || !query ? 'none' : 'block';
+            clearSearch.style.display = query ? 'block' : 'none';
+        };
+
+        // Debounced search
+        const debouncedSearch = debounce(performSearch, 300);
+
+        // Search input event
+        navSearchInput.addEventListener('input', () => {
+            const query = navSearchInput.value;
+            debouncedSearch(query);
+        });
+
+        // Clear search
+        clearSearch.addEventListener('click', () => {
+            navSearchInput.value = '';
+            productCards.forEach(card => {
+                card.classList.remove('hidden');
+                card.style.animation = 'flipin 0.8s ease-out';
+            });
+            noResults.style.display = 'none';
+            clearSearch.style.display = 'none';
+            navSearchInput.focus();
+        });
+
+        // Keyboard accessibility
+        navSearchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                performSearch(navSearchInput.value);
+            }
+            if (e.key === 'Escape') {
+                clearSearch.click();
+            }
+        });
+    </script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'936e6a618b321d6a',t:'MTc0NTc1NzkxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>
