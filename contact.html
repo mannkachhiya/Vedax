@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Vedax Pharma</title>
+    <link rel="icon" type="image/x-icon" href="./imgs/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="footer.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f4f7fc;
+            overflow-x: hidden;
+        }
+
+        .logo {
+        width: 180px;
+        height: auto;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            position: relative;
+            transition: color 0.3s ease;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+
+        .nav-links a.active {
+            color: #facc15;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #facc15;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #facc15;
+        }
+
+        .nav-search {
+            position: relative;
+            margin-left: 20px;
+            animation: searchpop 1s ease-out;
+        }
+
+        .nav-search input {
+            width: clamp(150px, 30vw, 250px);
+            padding: 0.5rem 2rem 0.5rem 2.5rem;
+            border: 2px solid #eb9324;
+            border-radius: 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            outline: none;
+            background: white;
+            color: #eb9324;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-search input:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+        }
+
+        .nav-search .fa-search {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1e3a8a;
+        }
+
+        .nav-search .clear-search {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #eb9324;
+            cursor: pointer;
+            font-size: 1rem;
+            display: none;
+        }
+
+        .get-in-touch {
+        background: #facc15;
+        color: #eb9324;
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        margin-left: 25px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .get-in-touch:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+    }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+
+        /* Contact Section */
+        .contact {
+            max-width: 1200px;
+            margin: 5rem auto 3rem;
+            padding: 0 20px;
+            min-height: calc(100vh - 180px);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 280px;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: slideup 1s ease-out;
+        }
+
+        .contact-form h2 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            color: #1e3a8a;
+            margin-bottom: 1.5rem;
+            animation: fadein 1s ease-in;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-form label {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #2dd4bf;
+            border-radius: 10px;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+            color: #1e3a8a;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contact-form button {
+            background: #facc15;
+            color: #1e3a8a;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+            animation: scaleglow 2s ease-in-out infinite;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+
+        .contact-form button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(250, 204, 21, 0.8);
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 280px;
+            animation: slideup 1s ease-out 0.2s;
+        }
+
+        .contact-info h2 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            color: #1e3a8a;
+            margin-bottom: 1.5rem;
+            animation: fadein 1s ease-in;
+        }
+
+        .contact-info p {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info a {
+            color: #2dd4bf;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #facc15;
+        }
+
+        .contact-info .social-links {
+            margin-top: 1rem;
+        }
+
+        .contact-info .social-links a {
+            margin: 0 10px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+
+        .contact-map {
+            margin-top: 2rem;
+            animation: fadein 1s ease-in 0.4s;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+       /* Footer */ /* Footer Styles 
+footer {
+    background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+    color: white;
+    padding: 1.5rem 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.footer-section {
+    margin: 0.5rem 0;
+    max-width: 40%;
+}
+
+.footer-section h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.footer-section p {
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+}
+
+.read-more {
+    background: #2dd4bf;
+    color: #1e3a8a;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.read-more:hover {
+    background-color: #facc15;
+    transform: scale(1.05);
+    color: #eb9324;
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.social-links a {
+    color: white;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.2);
+}
+
+
+
+    /* Responsive Design for Footer 
+    @media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .footer-section {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .social-links a {
+        font-size: 1.2rem;
+    }
+}
+
+        .social-links img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links img:hover {
+            transform: scale(1.2);
+        }
+        */
+
+        /* Animations */
+        @keyframes capsulespin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideup {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleglow {
+            0%, 100% { box-shadow: 0 0 15px rgba(250, 204, 21, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(250, 204, 21, 0.8); }
+        }
+
+        @keyframes fadewave {
+            0% { opacity: 0; transform: translateY(10px) skewY(3deg); }
+            50% { opacity: 0.5; transform: translateY(5px) skewY(-3deg); }
+            100% { opacity: 1; transform: translateY(0) skewY(0); }
+        }
+
+        @keyframes searchpop {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 77.2px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(90deg, #4fc49fcd, #eb9124d8);
+                padding: 1rem 0;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 10px 0;
+                font-size: 1.2rem;
+            }
+
+            .nav-search {
+                margin: 10px 0;
+                width: 90%;
+            }
+
+            .nav-search input {
+                width: 100%;
+            }
+
+            .contact {
+                margin: 4rem auto 2rem;
+                padding: 0 15px;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .contact-form, .contact-info {
+                min-width: 100%;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            .contact-map iframe {
+                height: 200px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-links a {
+                margin-left: 15px;
+            }
+
+            .nav-search {
+                margin-left: 15px;
+            }
+
+            .nav-search input {
+                width: clamp(120px, 25vw, 200px);
+            }
+
+            .contact {
+                gap: 1.5rem;
+            }
+
+            .contact-map iframe {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <header>
+        <nav>
+            <img src="./imgs/logo.png" alt="Vedax Pharma" class="logo">
+        <button class="hamburger" aria-label="Toggle menu">☰</button>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="products">Products</a>
+            <a href="about.html">About</a>
+            <a href="available">Available At</a>
+            <a href="" class="active">Contact</a>
+            <a href="get.html" class="get-in-touch" onMouseOver="this.style.color='#1e3a8a'" onMouseOut="this.style.color='#fff'">Get in Touch</a>
+                <div class="nav-search">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <input type="text" id="navSearchInput" placeholder="Search Products..." aria-label="Search products">
+                    <button class="clear-search" id="clearSearch" aria-label="Clear search">✖</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <script type="text/javascript">var submitted=false;</script>
+<iframe name="hidden_iframe" id="hidden_iframe" style="display: none" onload="if(submitted){window.location='sf.html';}"></iframe>
+
+    <section class="contact" id="contact">
+        <div class="contact-form">
+            <h2>Contact us</h2>
+            <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdzplBhSnG3nuISL1HfEYYw8YdqZWvGFK6N_S6wv5BePzg66A/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true"  class="form" id="form1">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="entry.1570530803" required aria-label="Your name">
+                
+                <label for="email">Email</label>
+                <input type="email" id="email" name="entry.1822557204" required aria-label="Your email">
+                
+                <label for="number">Phone Number</label>
+                <input type="number" id="phone" name="entry.1386492628" required aria-label="Your Phone Number" >
+                
+                <label for="message">Message</label>
+                <textarea id="message" name="entry.1912990133" required aria-label="Your message"></textarea>
+                <input type="hidden" id="States" name="entry.1429364416" value="1">
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <p><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:info@vedaxpharma.com">info@vedaxpharma.com</a></p>
+            <p><i class="fa fa-phone" aria-hidden="true"></i> +91 63591 57356</p>
+            <p><i class="fa fa-map-marker" aria-hidden="true"></i> J-99, Radha Park Society, Vadodara, Gujarat, India</p>
+            <!--div class="contact-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.540879379082!2d73.18152431489185!3d22.30715898531869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc8ab91a3ddab%3A0x7a3b7b7b7b7b7b7b!2sRadha%20Park%20Society%2C%20Vadodara%2C%20Gujarat%2C%20India!5e0!3m2!1sen!2sus!4v1697644321098!5m2!1sen!2sus" allowfullscreen="" loading="lazy" aria-label="Map of Vedax Pharma location"></iframe>
+        </div-->
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-section">
+            <h3>ABOUT US</h3>
+            <img src="imgs/logo.png" style="width: 150px;">
+            <p>Our company, Vedax Pharma, has had a long but fruitful journey during which we have successfully consolidated our market position.</p>
+            <a href="about.html" class="read-more">Read More</a>
+        </div>
+        <div class="footer-section">
+            <h3>CONTACT US</h3>
+            <p>J-99, Radha Park Society, Opp. Sardar Estate, New VIP Road, Vadodara - 390019, Gujarat, India.</p>
+            <p>+91 63591 57356</p>
+            <p>info@vedaxpharma.com</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/share/191Quj18k5/?mibextid=wwXIfr"><img src="imgs/facebook.png" alt="Facebook"></a>
+            <a href="https://wa.me/916359157356"><img src="imgs/whatsapp.png" alt="WhatsApp"></a>
+            <a href="https://www.instagram.com/vedaxpharmaofficial/"><img src="imgs/instagram.png" alt="Instagram"></a>
+            <a href="https://www.threads.com/@vedaxpharmaofficial"><img src="imgs/threads.png" alt="Threads"></a>
+        </div>
+    </footer>
+
+    
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Search functionality with debounce
+        const navSearchInput = document.getElementById('navSearchInput');
+        const clearSearch = document.getElementById('clearSearch');
+
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Search function (redirects to products page)
+        const performSearch = (query) => {
+            query = query.trim().toLowerCase().replace(/[^a-z0-9\s]/g, '');
+            if (query) {
+                window.location.href = `products.html?search=${encodeURIComponent(query)}`;
+            }
+        };
+
+        // Debounced search
+        const debouncedSearch = debounce(performSearch, 300);
+
+        // Search input event
+        navSearchInput.addEventListener('input', () => {
+            const query = navSearchInput.value;
+            clearSearch.style.display = query ? 'block' : 'none';
+            debouncedSearch(query);
+        });
+
+        // Clear search
+        clearSearch.addEventListener('click', () => {
+            navSearchInput.value = '';
+            clearSearch.style.display = 'none';
+            navSearchInput.focus();
+        });
+
+        // Keyboard accessibility for search
+        navSearchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                performSearch(navSearchInput.value);
+            }
+            if (e.key === 'Escape') {
+                clearSearch.click();
+            }
+        });
+
+    </script>
+</body>
+</html>
