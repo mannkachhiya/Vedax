@@ -223,15 +223,15 @@
         padding: clamp(60px, 10vh, 80px) 20px 20px;
     }
 
-    .slider-images {
-  border: 15px solid #eb9324; /* White frame */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Optional shadow for effect */
-  border-radius: 0px; /* Rounded corners */
-  overflow: hidden; /* Keeps images inside rounded frame */
+   .slider-images {
+  border: 15px solid #eb9324;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  border-radius: 0px;
+  overflow: hidden;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 80px); /* Reduce height */
   position: absolute;
-  top: 50%;
+  top: calc(50% + 40px); /* Push it down to compensate */
   left: 50%;
   transform: translate(-50%, -50%);
 }
