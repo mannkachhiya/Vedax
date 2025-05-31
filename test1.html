@@ -1243,32 +1243,76 @@
 </script>
 
 <script>
-  const slider = document.getElementById('testimonialSlider');
-  const slides = slider.querySelectorAll('.testimonial-slide');
-  let index = 0;
+const slider = document.getElementById('testimonialSlider');
+const slides = slider.querySelectorAll('.testimonial-slide');
+let index = 0;
+let startX = 0;
+let currentTranslate = 0;
+let isDragging = false;
 
-  function getVisibleSlides() {
-    return window.innerWidth <= 768 ? 1 : 2;
-  }
+function getVisibleSlides() {
+  return window.innerWidth <= 768 ? 1 : 2;
+}
 
-  function autoSlide() {
-    const visible = getVisibleSlides();
-    const maxIndex = slides.length - visible;
-    index = (index + 1) % (maxIndex + 1);
-    const slideWidth = slides[0].offsetWidth + 32; // includes margin/padding
-    slider.style.transform = `translateX(-${index * slideWidth}px)`;
-  }
+function slideTo(index) {
+  const slideWidth = slides[0].offsetWidth + 32;
+  const maxIndex = slides.length - getVisibleSlides();
+  if (index < 0) index = 0;
+  if (index > maxIndex) index = maxIndex;
+  currentTranslate = -index * slideWidth;
+  slider.style.transform = `translateX(${currentTranslate}px)`;
+}
 
-  let interval = setInterval(autoSlide, 4000);
+function autoSlide() {
+  index = (index + 1) % (slides.length - getVisibleSlides() + 1);
+  slideTo(index);
+}
 
-  // Reset on resize
-  window.addEventListener('resize', () => {
-    clearInterval(interval);
-    index = 0;
-    slider.style.transform = 'translateX(0)';
-    interval = setInterval(autoSlide, 4000);
-  });
+let interval = setInterval(autoSlide, 4000);
+
+function touchStart(e) {
+  clearInterval(interval);
+  isDragging = true;
+  startX = e.touches ? e.touches[0].clientX : e.clientX;
+}
+
+function touchMove(e) {
+  if (!isDragging) return;
+  const x = e.touches ? e.touches[0].clientX : e.clientX;
+  const moveX = x - startX;
+  slider.style.transform = `translateX(${currentTranslate + moveX}px)`;
+}
+
+function touchEnd(e) {
+  if (!isDragging) return;
+  isDragging = false;
+  const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+  const diff = endX - startX;
+
+  if (diff < -50) index++;
+  else if (diff > 50) index--;
+
+  slideTo(index);
+  interval = setInterval(autoSlide, 4000);
+}
+
+// Event Listeners
+slider.addEventListener('mousedown', touchStart);
+slider.addEventListener('mousemove', touchMove);
+slider.addEventListener('mouseup', touchEnd);
+slider.addEventListener('mouseleave', touchEnd);
+
+slider.addEventListener('touchstart', touchStart, { passive: true });
+slider.addEventListener('touchmove', touchMove, { passive: true });
+slider.addEventListener('touchend', touchEnd);
+
+// Resize reset
+window.addEventListener('resize', () => {
+  index = 0;
+  slideTo(index);
+});
 </script>
+
 
 
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93602047c9087bde',t:'MTc0NTYwODA3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
