@@ -211,17 +211,25 @@
     }
 
     /* Slider Section */
+   .slider {
+    height: 100vh; 
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: clamp(60px, 10vh, 80px) 20px 20px;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
     .slider {
-        height: 95vh;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: white;
-        padding: clamp(60px, 10vh, 80px) 20px 20px;
+        height: 80vh;
     }
+}
+
 
    .slider-images {
   border: 15px solid #eb9324;
