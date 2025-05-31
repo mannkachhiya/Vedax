@@ -574,6 +574,23 @@
   font-size: 0.9rem;
 }
 
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.dot.active,
+.dot:hover {
+  background-color: #717171;
+}
+
+
 @media (max-width: 768px) {
   .testimonial-slide {
     flex: 0 0 100%;
@@ -1080,37 +1097,46 @@
 </section>
 
 <div class="fullscreen-bg">
-    <div class="container">
-        <h2 class="section-title" align="center"><span class="highlight">CLIENT</span> TESTIMONIAL'S</h2>
-        <hr>
-        <div class="testimonial-slider-wrapper">
-  <div class="testimonial-slider" id="testimonialSlider">
-    <div class="testimonial-slide">
-      <img src="./imgs/profile.png" alt="Avatar">
-      <p><em>Pikaso is doing a great job; I'm pleased with how rapidly they are addressing our needs.</em></p>
-      <div class="name">K.K Patel</div>
-      <div class="role">Customer</div>
+  <div class="container">
+    <h2 class="section-title" align="center"><span class="highlight">CLIENT</span> TESTIMONIAL'S</h2>
+    <hr>
+
+    <!-- Slider -->
+    <div class="testimonial-slider-wrapper">
+      <div class="testimonial-slider" id="testimonialSlider">
+        <div class="testimonial-slide">
+          <img src="./imgs/profile.png" alt="Avatar">
+          <p><em>Pikaso is doing a great job; I'm pleased with how rapidly they are addressing our needs.</em></p>
+          <div class="name">K.K Patel</div>
+          <div class="role">Customer</div>
+        </div>
+        <div class="testimonial-slide">
+          <img src="./imgs/profile.png" alt="Avatar">
+          <p><em>We love your product -- I use it every day and cannot imagine my job without it!</em></p>
+          <div class="name">Hitarth Patel</div>
+          <div class="role">Customer</div>
+        </div>
+        <div class="testimonial-slide">
+          <img src="./imgs/profile.png" alt="Avatar">
+          <p><em>We are very happy with the results of the recently launched products.</em></p>
+          <div class="name">DWSS</div>
+          <div class="role">Customer</div>
+        </div>
+        <div class="testimonial-slide">
+          <img src="./imgs/profile.png" alt="Avatar">
+          <p><em>Excellent service and product quality. Highly recommend Vedax Pharma.</em></p>
+          <div class="name">Ramesh S.</div>
+          <div class="role">Customer</div>
+        </div>
+      </div>
     </div>
-    <div class="testimonial-slide">
-      <img src="./imgs/profile.png" alt="Avatar">
-      <p><em>We love your product -- I use it every day and cannot imagine my job without it!</em></p>
-      <div class="name">Hitarth Patel</div>
-      <div class="role">Customer</div>
-    </div>
-    <div class="testimonial-slide">
-      <img src="./imgs/profile.png" alt="Avatar">
-      <p><em>We are very happy with the results of the recently launched products.</em></p>
-      <div class="name">DWSS</div>
-      <div class="role">Customer</div>
-    </div>
-    <div class="testimonial-slide">
-      <img src="./imgs/profile.png" alt="Avatar">
-      <p><em>Excellent service and product quality. Highly recommend Vedax Pharma.</em></p>
-      <div class="name">Ramesh S.</div>
-      <div class="role">Customer</div>
-    </div>
+
+    <!-- Dots -->
+    <div style="text-align:center; margin-top: 1rem;" id="dotsContainer"></div>
   </div>
 </div>
+
+
 
     </div>
 </div>
@@ -1135,6 +1161,118 @@
             </div>
         </div>
     </footer>
+
+   <script>
+  const slider = document.getElementById('testimonialSlider');
+  const slides = slider.querySelectorAll('.testimonial-slide');
+  const dotsContainer = document.getElementById('dotsContainer');
+  let index = 0;
+  let currentTranslate = 0;
+  let isDragging = false;
+  let startX = 0;
+  let interval;
+  let dots = [];
+
+  function getVisibleSlides() {
+    return window.innerWidth <= 768 ? 1 : 2;
+  }
+
+  function getSlideWidth() {
+    return document.querySelector('.testimonial-slide').offsetWidth;
+  }
+
+  function slideTo(i) {
+    const maxIndex = slides.length - getVisibleSlides();
+    index = Math.max(0, Math.min(i, maxIndex));
+    currentTranslate = -index * getSlideWidth();
+    slider.style.transform = `translateX(${currentTranslate}px)`;
+    updateDots(index);
+  }
+
+  function updateDots(activeIndex) {
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === activeIndex);
+    });
+  }
+
+  function createDots() {
+    dotsContainer.innerHTML = "";
+    const totalDots = slides.length - getVisibleSlides() + 1;
+    dots = [];
+
+    for (let i = 0; i < totalDots; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'dot';
+      dot.addEventListener('click', () => {
+        clearInterval(interval);
+        slideTo(i);
+        interval = setInterval(autoSlide, 4000);
+      });
+      dotsContainer.appendChild(dot);
+      dots.push(dot);
+    }
+
+    updateDots(index);
+  }
+
+  function autoSlide() {
+    const maxIndex = slides.length - getVisibleSlides();
+    index = (index + 1) % (maxIndex + 1);
+    slideTo(index);
+  }
+
+  function onStart(e) {
+    clearInterval(interval);
+    isDragging = true;
+    startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+    slider.style.transition = 'none';
+  }
+
+  function onMove(e) {
+    if (!isDragging) return;
+    const x = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+    const delta = x - startX;
+    slider.style.transform = `translateX(${currentTranslate + delta}px)`;
+  }
+
+  function onEnd(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    const endX = e.type.includes('mouse') ? e.clientX : e.changedTouches[0].clientX;
+    const delta = endX - startX;
+    const threshold = 50;
+
+    if (delta < -threshold) index++;
+    else if (delta > threshold) index--;
+
+    slider.style.transition = 'transform 0.5s ease';
+    slideTo(index);
+    interval = setInterval(autoSlide, 4000);
+  }
+
+  slider.addEventListener('mousedown', onStart);
+  slider.addEventListener('mousemove', onMove);
+  slider.addEventListener('mouseup', onEnd);
+  slider.addEventListener('mouseleave', onEnd);
+
+  slider.addEventListener('touchstart', onStart, { passive: true });
+  slider.addEventListener('touchmove', onMove, { passive: true });
+  slider.addEventListener('touchend', onEnd);
+
+  window.addEventListener('resize', () => {
+    index = 0;
+    createDots();
+    slideTo(index);
+  });
+
+  // Init everything
+  createDots();
+  slideTo(index);
+  interval = setInterval(autoSlide, 4000);
+</script>
+
+
+
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script type="text/javascript">
     var gk_isXlsx = false;
