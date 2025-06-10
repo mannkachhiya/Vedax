@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Under Maintenance</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #4fc49fcd 0%, #eb9124d8 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .maintenance-container {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .shape:nth-child(3) {
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        
+        .shape:nth-child(4) {
+            bottom: 20%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .call-button {
+            background: linear-gradient(45deg, #4fc49f, #eb9124);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .call-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gear-animation {
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .content-card {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="floating-shapes">
+        <div class="shape w-20 h-20 bg-white rounded-full"></div>
+        <div class="shape w-16 h-16 bg-white rounded-lg"></div>
+        <div class="shape w-12 h-12 bg-white rounded-full"></div>
+        <div class="shape w-24 h-24 bg-white rounded-lg"></div>
+    </div>
+    
+    <div class="content-card rounded-3xl p-8 md:p-12 max-w-lg w-full text-center text-white relative z-10">
+        <div class="mb-8">
+            <div class="inline-flex items-center justify-center w-24 h-24 bg-white bg-opacity-20 rounded-full mb-6 pulse-animation">
+                <i class="fas fa-cog text-4xl gear-animation"></i>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                We're Under
+                <span class="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+                    Maintenance
+                </span>
+            </h1>
+            
+            <p class="text-lg md:text-xl opacity-90 leading-relaxed">
+                Our website is currently undergoing scheduled maintenance to bring you an even better experience. We appreciate your patience!
+            </p>
+        </div>
+        
+        <div class="space-y-6">
+            <div class="bg-white bg-opacity-10 rounded-2xl p-6 border border-white border-opacity-20">
+                <div class="flex items-center justify-center mb-3">
+                    <i class="fas fa-tools text-2xl opacity-80"></i>
+                </div>
+                <p class="text-sm opacity-80">
+                    We're working hard to improve our services and will be back online soon.
+                </p>
+            </div>
+            
+            <div class="pt-4">
+                <p class="text-sm opacity-80 mb-4">Need immediate assistance?</p>
+                <a href="tel:+916359157356" class="call-button inline-flex items-center px-8 py-4 rounded-full text-white font-semibold text-lg no-underline">
+                    <i class="fas fa-phone-alt mr-3"></i>
+                    Call Us Now
+                </a>
+                <p class="text-xs opacity-60 mt-3">+91 63591 57356</p>
+            </div>
+        </div>
+        
+        <div class="mt-8 pt-6 border-t border-white border-opacity-20">
+            <p class="text-sm opacity-70">
+                Thank you for your understanding
+            </p>
+        </div>
+    </div>
+</body>
+</html>
