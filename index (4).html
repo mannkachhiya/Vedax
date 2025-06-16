@@ -563,6 +563,7 @@ position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Ensures content is spaced out, pushing name and role to the bottom */
+  align-items: center; /* Centers all content horizontally */
 }
 
 .testimonial-slide em {
@@ -575,6 +576,8 @@ position: fixed;
   width: 200px;
   height: 200px;
   border-radius: 5%;
+  margin: 0 auto; /* Ensures the image is horizontally centered */
+  display: block; /* Makes the image a block element for centering */
 }
 
 .testimonial-slide .name {
@@ -595,6 +598,7 @@ position: fixed;
 .testimonial-slide p {
   order: 1; /* Ensures the testimonial text stays above name and role */
   flex-grow: 1; /* Allows the text to take up available space */
+  width: 100%; /* Ensures text remains full-width and centered */
 }
 
 .dot {
