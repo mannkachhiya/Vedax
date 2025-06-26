@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Explorer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e0e7ff, #f3f4f6);
+            color: #333;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        #searchInput {
+            padding: 12px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        #searchInput:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+        }
+        .tree {
+            margin-top: 20px;
+        }
+        .tree ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        .tree li {
+            margin: 8px 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .tree li::before {
+            content: "├── ";
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+        .tree li:last-child::before {
+            content: "└── ";
+        }
+        .tree a {
+            text-decoration: none;
+            color: #1e40af;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .tree a:hover {
+            color: #3b82f6;
+            text-decoration: underline;
+        }
+        .tree .directory::before {
+            content: "📁 ";
+            cursor: pointer;
+        }
+        .tree .file::before {
+            content: "📄 ";
+        }
+        .tree .directory.collapsed > ul {
+            display: none;
+        }
+        .tree .directory.expanded > a::after {
+            content: " ▼";
+            font-size: 0.8em;
+            color: #6b7280;
+        }
+        .tree .directory.collapsed > a::after {
+            content: " ►";
+            font-size: 0.8em;
+            color: #6b7280;
+        }
+        .error {
+            color: #dc2626;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>File Explorer</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search files or directories...">
+        </div>
+        <div class="tree" id="fileTree"></div>
+        <div id="error" class="error"></div>
+    </div>
+
+    <script>
+        // File paths from the provided list
+        const filePaths = [
+            "./1",
+            "./products",
+            "./about",
+            "./available/",
+            "./contact",
+            "./get",
+            "./products/",
+            "./",
+            "./available/anand/",
+            "./available/bharuch/",
+            "./available/chhota_udepur/",
+            "./available/dahod/",
+            "./available/dang/",
+            "./available/kheda/",
+            "./available/kutch/",
+            "./available/mahisagar/",
+            "./available/narmada/",
+            "./available/panchmahal/",
+            "./available/surat/",
+            "./available/tapi/",
+            "./available/vadodara/",
+            "./products/product-details",
+            "./available/anand/umreth",
+            "./available/bharuch/amod",
+            "./available/bharuch/jambusar",
+            "./available/bharuch/jhagadia",
+            "./available/bharuch/nabipur",
+            "./available/bharuch/nana_sanja",
+            "./available/bharuch/netrang",
+            "./available/bharuch/rajpardi",
+            "./available/bharuch/vagra",
+            "./available/chhota_udepur/bodeli",
+            "./available/chhota_udepur/chhota_udepur",
+            "./available/chhota_udepur/jabugam",
+            "./available/chhota_udepur/kawant",
+            "./available/chhota_udepur/naswadi",
+            "./available/chhota_udepur/pavijetpur",
+            "./available/dahod/dahod",
+            "./available/dahod/devgadh_baria",
+            "./available/dahod/fatepura",
+            "./name/dahod/gangardi",
+            "./available/dahod/garbada",
+            "./available/dahod/jesawada",
+            "./available/dahod/sanjeli",
+            "./available/dahod/zalod",
+            "./available/dang/ahwa",
+            "./available/kheda/dakor",
+            "./available/kheda/sevaliya",
+            "./available/kheda/thasra",
+            "./available/kheda/thermal",
+            "./available/kutch/adipur",
+            "./available/kutch/gandhidham",
+            "./available/kutch/shinay",
+            "./available/mahisagar/balasinor",
+            "./available/mahisagar/kothamba",
+            "./available/mahisagar/lunawada",
+            "./available/narmada/dediapada",
+            "./available/narmada/devaliya_chokdi",
+            "./available/narmada/kevadia",
+            "./available/narmada/rajpipla",
+            "./available/narmada/shambhunagar",
+            "./available/panchmahal/ghoghamba",
+            "./available/panchmahal/godhra",
+            "./available/panchmahal/halol",
+            "./available/panchmahal/mahelol",
+            "./available/panchmahal/mora",
+            "./available/panchmahal/morva_hadaf",
+            "./available/panchmahal/panorama_chokdi",
+            "./available/panchmahal/shahera",
+            "./available/panchmahal/vejalpur",
+            "./available/surat/areth",
+            "./available/surat/kevdi",
+            "./available/surat/mandvi",
+            "./available/surat/mangrol",
+            "./available/surat/umarpada",
+            "./available/surat/vankal",
+            "./available/surat/zankhvav",
+            "./available/tapi/songadh",
+            "./available/vadodara/bahadarpur",
+            "./available/vadodara/bajwa",
+            "./available/vadodara/bhatpur",
+            "./available/vadodara/chalamali",
+            "./available/vadodara/dabhoi",
+            "./available/vadodara/desar",
+            "./available/vadodara/handod",
+            "./available/vadodara/jabugam",
+            "./available/vadodara/jarod",
+            "./available/vadodara/karavan",
+            "./available/vadodara/karjan",
+            "./available/vadodara/kosindra",
+            "./available/vadodara/manjusar",
+            "./available/vadodara/masarroad",
+            "./available/vadodara/muvalchokdi",
+            "./available/vadodara/nandsari",
+            "./available/vadodara/padra",
+            "./available/vadodara/por",
+            "./available/vadodara/ranoli",
+            "./available/vadodara/sadhli",
+            "./available/vadodara/samalaya",
+            "./available/vadodara/sankheda",
+            "./available/vadodara/savli",
+            "./available/vadodara/segwa",
+            "./available/vadodara/shinor",
+            "./available/vadodara/sokhada",
+            "./available/vadodara/Vadodaracity",
+            "./available/vadodara/vadu"
+        ];
+
+        // Function to build a tree structure from file paths
+        function buildTree(paths) {
+            const tree = {};
+            paths.forEach(path => {
+                const parts = path.replace(/^\.\//, '').split('/').filter(p => p);
+                let current = tree;
+                parts.forEach((part, index) => {
+                    if (!current[part]) {
+                        current[part] = { children: {}, isDir: index < parts.length - 1 || part.endsWith('/') };
+                    }
+                    current = current[part].children;
+                });
+            });
+            return tree;
+        }
+
+        // Function to render the tree
+        function renderTree(tree, parentElement, prefix = '') {
+            const ul = document.createElement('ul');
+            const entries = Object.keys(tree).sort();
+            entries.forEach((key, index) => {
+                const node = tree[key];
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = prefix + key + (node.isDir ? '/' : '');
+                a.textContent = key;
+                li.className = node.isDir ? 'directory expanded' : 'file';
+                if (node.isDir) {
+                    a.onclick = (e) => {
+                        e.preventDefault();
+                        li.classList.toggle('collapsed');
+                        li.classList.toggle('expanded');
+                    };
+                }
+                li.appendChild(a);
+                if (Object.keys(node.children).length > 0) {
+                    renderTree(node.children, li, prefix + key + '/');
+                }
+                ul.appendChild(li);
+            });
+            parentElement.appendChild(ul);
+        }
+
+        // Function to filter the tree based on search input
+        function filterTree(searchTerm) {
+            const treeElement = document.getElementById('fileTree');
+            treeElement.innerHTML = ''; // Clear current tree
+            if (!searchTerm) {
+                renderTree(buildTree(filePaths), treeElement);
+                return;
+            }
+            const filteredPaths = filePaths.filter(path => 
+                path.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            renderTree(buildTree(filteredPaths), treeElement);
+        }
+
+        // Load file tree and set up search on page load
+        window.onload = function() {
+            try {
+                const fileTree = document.getElementById('fileTree');
+                renderTree(buildTree(filePaths), fileTree);
+                
+                // Add search functionality
+                const searchInput = document.getElementById('searchInput');
+                searchInput.addEventListener('input', () => {
+                    filterTree(searchInput.value);
+                });
+            } catch (error) {
+                document.getElementById('error').textContent = 'Error rendering file tree: ' + error.message;
+            }
+        };
+    </script>
+</body>
+</html>
